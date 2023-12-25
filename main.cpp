@@ -1059,53 +1059,223 @@ void house1(int r, int g, int b){
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(r, g, b);
-        glVertex2f(-81, 51.5);
-        glVertex2f(-69.4, 50.8);
-        glVertex2f(-76.1, 60);
+        glVertex2f(-81, 41.5);
+        glVertex2f(-69.4, 40.8);
+        glVertex2f(-76.1, 50);
     glEnd();
 
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(164, 0, 137);
-        glVertex2f(-69.4, 50.8);
-        glVertex2f(-52.4, 52);
-        glVertex2f(-59.6, 60.5);
-        glVertex2f(-76.1, 60);
+        glVertex2f(-69.4, 40.8);
+        glVertex2f(-52.4, 42);
+        glVertex2f(-59.6, 50.5);
+        glVertex2f(-76.1, 50);
     glEnd();
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(r, g, b);
-        glVertex2f(-80, 43);
-        glVertex2f(-69.1, 41.8);
-        glVertex2f(-69.4, 50.8);
-        glVertex2f(-80.1 , 51.4);
+        glVertex2f(-80, 33);
+        glVertex2f(-69.1, 31.8);
+        glVertex2f(-69.4, 40.8);
+        glVertex2f(-80.1 , 41.4);
     glEnd();
 
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(r, g, b);
-        glVertex2f(-69.1, 41.8);
-        glVertex2f(-53.38, 43.64);
-        glVertex2f(-53.46, 51.92);
-        glVertex2f(-69.4 , 50.8);
+        glVertex2f(-69.1, 31.8);
+        glVertex2f(-53.38, 33.64);
+        glVertex2f(-53.46, 41.92);
+        glVertex2f(-69.4 , 40.8);
     glEnd();
 
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(121, 105, 0);
-        glVertex2f(-81.1, 41.5);
-        glVertex2f(-69.1, 40.43);
-        glVertex2f(-69.1, 41.8);
-        glVertex2f(-81.1, 43);
+        glVertex2f(-81.1, 31.5);
+        glVertex2f(-69.1, 30.43);
+        glVertex2f(-69.1, 31.8);
+        glVertex2f(-81.1, 33);
     glEnd();
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(121, 105, 0);
-        glVertex2f(-69.1, 40.3);
-        glVertex2f(-52, 42.4);
-        glVertex2f(-52.1, 43.8);
-        glVertex2f(-69.1, 41.8);
+        glVertex2f(-69.1, 30.3);
+        glVertex2f(-52, 32.4);
+        glVertex2f(-52.1, 33.8);
+        glVertex2f(-69.1, 31.8);
     glEnd();
+
+
+
+    glBegin(GL_POLYGON);   // door
+	glColor3ub(212, 122, 0);
+        glVertex2f(-64, 32.39);
+        glVertex2f(-60, 32.87);
+        glVertex2f(-60, 39.5);
+        glVertex2f(-64, 39);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // door
+	glColor3ub(212, 122, 0);
+        glVertex2f(-77, 35);
+        glVertex2f(-73, 34.5);
+        glVertex2f(-73, 38.5);
+        glVertex2f(-77, 39);
+    glEnd();
+
+}
+
+
+
+
+
+void house2(int r, int g, int b){
+
+
+
+
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(0, 14, 190);
+        glVertex2f(-57, 29.4);
+        glVertex2f(-41.3, 30.5);
+        glVertex2f(-41.3, 38);
+        glVertex2f(-57, 37.09);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(0, 14, 190);
+        glVertex2f(-41.3, 30.5);
+        glVertex2f(-32.8, 33);
+        glVertex2f(-32.8, 39);
+        glVertex2f(-38.2, 45.2);
+        glVertex2f(-40.3, 38);
+        glVertex2f(-41.3, 38);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(r, g, b);
+        glVertex2f(-58.8, 37);
+        glVertex2f(-40.3, 38);
+        glVertex2f(-37.8, 47);
+        glVertex2f(-54.8, 46);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(0, 8, 104);
+        glVertex2f(-38.2, 45.2);
+        glVertex2f(-32.8, 39);
+        glVertex2f(-31.8, 40);
+        glVertex2f(-37.8, 47);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(72, 58, 0);
+        glVertex2f(-57.8, 29.4);
+        glVertex2f(-57.8, 28);
+        glVertex2f(-41.3, 29);
+        glVertex2f(-41.3, 30.5);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(72, 58, 0);
+        glVertex2f(-41.3, 29);
+        glVertex2f(-32, 32);
+        glVertex2f(-32, 33.2);
+        glVertex2f(-41.3, 30.5);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // door
+	glColor3ub(141, 0, 163);
+        glVertex2f(-51.5070, 29.7528);
+        glVertex2f(-48.5013, 30.0199);
+        glVertex2f(-48.5, 35);
+        glVertex2f(-51.5, 35);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // window
+	glColor3ub(0, 120, 2);
+        glVertex2f(-38.2, 34.4);
+        glVertex2f(-36, 34.8);
+        glVertex2f(-36, 37);
+        glVertex2f(-38.2, 36.6);
+    glEnd();
+
+
+
+
+
+
+}
+
+
+
+
+void tree1(int r, int g, int b){
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(r, g, b);
+        glVertex2f(-99, 24);
+        glVertex2f(-89, 24);
+        glVertex2f(-91, 44);
+        glVertex2f(-97, 44);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(r, g, b);
+        glVertex2f(-91, 44);
+        glVertex2f(-90.45, 38.54);
+        glVertex2f(-80, 57);
+        glVertex2f(-80, 60);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(r, g, b);
+        glVertex2f(-97, 44);
+        glVertex2f(-91, 44);
+        glVertex2f(-93, 53);
+        glVertex2f(-96, 53);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(r, g, b);
+        glVertex2f(-97, 44);
+        glVertex2f(-96, 53);
+        glVertex2f(-99, 64);
+        glVertex2f(-101, 64);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(r, g, b);
+        glVertex2f(-91, 44);
+        glVertex2f(-87, 64);
+        glVertex2f(-89, 64);
+        glVertex2f(-93, 53);
+    glEnd();
+
+    circle( 6.77, -98, 68, 7, 151, 0);
+    circle( 6.77, -106, 72, 7, 151, 0);
+    circle( 6.77, -106, 64, 7, 151, 0);
+    circle( 6.77, -96, 76, 7, 151, 0);
+
+    circle( 6.77, -72, 60, 7, 151, 0);
+    circle( 6.77, -80, 60, 7, 151, 0);
+    circle( 6.77, -76, 68, 7, 151, 0);
+
+    circle( 6.77, -88, 68, 7, 151, 0);
+    circle( 6.77, -85, 76, 7, 151, 0);
+
+    circle( 6.77, -88, 80, 7, 151, 0);
+
 
 
 }
@@ -1141,6 +1311,8 @@ void display() {
 
     boat2();
     house1(0, 179, 200);
+    house2(99, 0, 91);
+    tree1(121, 105, 0);
 
 
     glFlush();  // Render now

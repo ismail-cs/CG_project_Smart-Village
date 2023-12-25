@@ -440,6 +440,77 @@ void lamp_post_2(){
     }
 }
 
+
+// Lamp Post Night Mode ----- Avizit Roy
+
+void lamp_post_night(){
+
+    int x = -105, y= -25;
+
+    for(int i =0, j=0; i<22; i++, j++){
+
+        glBegin(GL_POLYGON);   // main line
+        glColor3ub(59, 81, 0);
+            glVertex2f(x, y);
+            glVertex2f(x+0.6, y);
+            glVertex2f(x+0.6, y+6);
+            glVertex2f(x, y+6);
+        glEnd();
+
+        circle(0.6, x+1.5, y+7.4, 255, 247, 0);  // light
+
+        glBegin(GL_POLYGON);   // up line
+        glColor3ub(59, 81, 0);
+            glVertex2f(x, y+6);
+            glVertex2f(x+0.6, y+6);
+            glVertex2f(x+1.6, y+8);
+            glVertex2f(x+1, y+8);
+        glEnd();
+
+        x += 10;
+        if(j%2==0){
+            y++;
+        }
+
+    }
+}
+
+void lamp_post_2_night(){
+
+    int x = -103.4, y= -1.9;
+
+    for(int i =0, j=0; i<22; i++, j++){
+
+        glBegin(GL_POLYGON);   // main line
+        glColor3ub(59, 81, 0);
+            glVertex2f(x, y);
+            glVertex2f(x+0.6, y);
+            glVertex2f(x+1, y+3.7);
+            glVertex2f(x+0.4, y+3.7);
+        glEnd();
+
+        circle(0.366, x+2, y+4.4, 255, 247, 0);  // light
+
+
+
+        glBegin(GL_POLYGON);   // up line
+        glColor3ub(59, 81, 0);
+            glVertex2f(x+0.4, y+3.7);
+            glVertex2f(x+1, y+3.7);
+            glVertex2f(x+2.2, y+4.9);
+            glVertex2f(x+1.6, y+4.9);
+        glEnd();
+
+        x += 10;
+        if(j==5){
+            y+=1;
+            j=0;
+        }
+
+    }
+}
+
+
 void river(int r, int g, int b){
 
     glBegin(GL_POLYGON);   // upp mut
@@ -2065,7 +2136,54 @@ void factory() {
 }
 
 
+void display_night() {
 
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
+    glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
+    glLineWidth(7.5);
+
+    fild(64, 200, 0);
+    river(168, 241, 255);
+    river_wave(147, 224, 240);
+    sky(61, 96, 112);
+    up_fild(94, 250, 89);
+
+    road();
+    road_mid_line(180,180,180);
+    car1(188, 0, 0);
+    lamp_post_night();
+
+    grass_night(-106, -66);
+    grass_night(-95, -66);
+    grass_night(-100, -64);
+    grass_night(-111, -70);
+    grass_night(-104, -71);
+
+    grass_night(-91, -68);
+    sun(223, 234, 0);
+    cloud1(231, 231, 231);
+    cloud2(231, 231, 231);
+
+    boat1();
+
+    boat2();
+
+    house_back_side(212, 164, 0);
+    house1(0, 179, 200);
+    house2(99, 0, 91);
+    tree1(121, 105, 0);
+
+    schoolRoad();
+    schoolField();
+    schoolBuilding();
+    flagPole();
+
+    lamp_post_2_night();
+    car2(255, 216, 0);
+
+
+    glFlush();  // Render now
+}
 
 void display() {
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque

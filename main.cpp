@@ -28,6 +28,17 @@ GLfloat car2_position_x = -40.0f;
 GLfloat car2_position_y = 1.0f;
 GLfloat car_2_speed = 2.0f;
 
+
+
+GLfloat cloud1_position_x = 65.0f;
+GLfloat cloud_1_speed = 0.6f;
+
+GLfloat cloud2_position_x = 65.0f;
+GLfloat cloud_2_speed = 0.8f;
+
+GLfloat sun_position_y = 40.0f;
+GLfloat sun_speed = 1.0f;
+
 void display();
 
 void boat_animation_1(int value) {
@@ -95,6 +106,47 @@ void car_animation_2(int value) {
 
 
 
+void cloud_animation_1(int value) {
+
+    if(cloud1_position_x <-190.0)
+        cloud1_position_x = 70.0f;
+
+    cloud1_position_x -= cloud_1_speed;
+
+	glutPostRedisplay();
+
+	glutTimerFunc(100,cloud_animation_1,0);
+}
+
+void cloud_animation_2(int value) {
+
+    if(cloud2_position_x <-190.0)
+        cloud2_position_x = 70.0f;
+
+    cloud2_position_x -= cloud_2_speed;
+
+	glutPostRedisplay();
+
+	glutTimerFunc(100,cloud_animation_2,0);
+}
+
+
+void sun_animation(int value) {
+
+    if(sun_position_y > 98.0){
+        sun_position_y = 40.0f;
+    }
+
+
+    sun_position_y += sun_speed;
+
+	glutPostRedisplay();
+
+	glutTimerFunc(100,sun_animation,0);
+}
+
+
+
 void disback(int val)
 {
     glutDisplayFunc(display);
@@ -110,8 +162,7 @@ void disback(int val)
 
 
 
-void circle(float radius, float xc, float yc, float r, float g, float b)
-{
+void circle(float radius, float xc, float yc, float r, float g, float b){
     glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
     for(int i=0;i<200;i++)
         {
@@ -123,6 +174,35 @@ void circle(float radius, float xc, float yc, float r, float g, float b)
             float y = r * sin(A);
             glVertex2f(x+xc,y+yc);
         }
+    glEnd();
+}
+
+
+
+void drawTransparentCircle(float x, float y, float radius, float transparency) {
+    int numSegments = 100;
+    glBegin(GL_TRIANGLE_FAN);
+    glColor4f(1.0f, 1.0f, 1.0f, transparency); // White color with transparency
+
+    for (int i = 0; i <= numSegments; i++) {
+        float theta = 2.0f * 3.1415926f * float(i) / float(numSegments);
+        float dx = radius * cosf(theta);
+        float dy = radius * sinf(theta);
+        glVertex2f(x + dx, y + dy);
+    }
+
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);
+    glColor3f(1.0f, 1.0f, 1.0f); // White color for the outline
+
+    for (int i = 0; i <= numSegments; i++) {
+        float theta = 2.0f * 3.1415926f * float(i) / float(numSegments);
+        float dx = radius * cosf(theta);
+        float dy = radius * sinf(theta);
+        glVertex2f(x + dx, y + dy);
+    }
+
     glEnd();
 }
 
@@ -318,6 +398,43 @@ void lamp_post(){
         x += 10;
         if(j%2==0){
             y++;
+        }
+
+    }
+}
+
+
+
+void lamp_post_2(){
+
+    int x = -103.4, y= -1.9;
+
+    for(int i =0, j=0; i<22; i++, j++){
+
+        glBegin(GL_POLYGON);   // main line
+        glColor3ub(59, 81, 0);
+            glVertex2f(x, y);
+            glVertex2f(x+0.6, y);
+            glVertex2f(x+1, y+3.7);
+            glVertex2f(x+0.4, y+3.7);
+        glEnd();
+
+        circle(0.366, x+2, y+4.4, 130, 120, 0);  // light
+
+
+
+        glBegin(GL_POLYGON);   // up line
+        glColor3ub(59, 81, 0);
+            glVertex2f(x+0.4, y+3.7);
+            glVertex2f(x+1, y+3.7);
+            glVertex2f(x+2.2, y+4.9);
+            glVertex2f(x+1.6, y+4.9);
+        glEnd();
+
+        x += 10;
+        if(j==5){
+            y+=1;
+            j=0;
         }
 
     }
@@ -1322,6 +1439,434 @@ void house_back_side(int r, int g, int b){
 
 }
 
+
+
+
+void cloud1 (int r, int g, int b){
+
+glPushMatrix();
+glTranslatef(cloud1_position_x,0.0f, 0.0f);
+
+    circle( 4.5, 10, 80, r, g, b);
+    circle( 3, 14, 79, r, g, b);
+    circle( 3, 6, 79, r, g, b);
+
+glPopMatrix();
+
+}
+
+
+
+void cloud2 (int r, int g, int b){
+
+glPushMatrix();
+glTranslatef(cloud2_position_x,0.0f, 0.0f);
+
+    circle( 4.5, 30, 75, r, g, b);
+    circle( 3, 35, 74, r, g, b);
+    circle( 3, 23, 74, r, g, b);
+    circle( 3, 25, 76, r, g, b);
+    circle( 3, 26, 74, r, g, b);
+
+glPopMatrix();
+
+}
+
+
+void sun (int r, int g, int b){
+
+
+//glPushMatrix();
+//glTranslatef(0.0f,sun_position_y, 0.0f);
+
+    circle( 6, 30, 75, r, g, b);
+
+//glPopMatrix();
+
+}
+
+
+
+//==============================================================================================================================================
+
+
+
+
+
+
+
+// School Road ----- Avizit Roy
+void schoolRoad() {
+    // Right Road
+    glBegin(GL_POLYGON);
+    glColor3ub(180, 180, 180);
+    glVertex2f(75.8229, 1.22324);
+    glVertex2f(76, 36);
+    glVertex2f(72, 32);
+    glVertex2f(71.8025, 1.1318);
+    glEnd();
+
+    // Center Road
+    glBegin(GL_POLYGON);
+    glColor3ub(180, 180, 180);
+    glVertex2f(76, 36);
+    glVertex2f(18, 36);
+    glVertex2f(22, 32);
+    glVertex2f(72, 32);
+    glEnd();
+
+    // Left Road
+    glBegin(GL_POLYGON);
+    glColor3ub(180, 180, 180);
+    glVertex2f(18, 36);
+    glVertex2f(18.013168, 0.10939);
+    glVertex2f(21.87264, 0.1971);
+    glVertex2f(22, 32);
+    glEnd();
+}
+
+
+// School Field Box Function ----- Avizit Roy
+void schoolFieldBox(float a, float b, float c, float d, float e, float f, float g, float h) {
+    glColor3ub(255,255,255);
+    glBegin(GL_LINES);
+    glVertex2f(a, b);
+    glVertex2f(c, d);
+    glVertex2f(c, d);
+    glVertex2f(e, f);
+    glVertex2f(e, f);
+    glVertex2f(g, h);
+    glVertex2f(g, h);
+    glVertex2f(a, b);
+    glEnd();
+}
+
+// School Field ----- Avizit Roy
+void schoolField() {
+
+    // Main Outline
+    glColor3ub(134, 255, 51);
+    glBegin(GL_QUADS);
+    glVertex2f(24.0, 30.0);
+    glVertex2f(70.0, 30.0);
+    glVertex2f(70.0, 10.0);
+    glVertex2f(24.0, 10.0);
+    glEnd();
+
+    // Field Outside White Outline
+    glColor3ub(255, 255, 255);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(24.0, 30.0);
+    glVertex2f(70.0, 30.0);
+    glVertex2f(70.0, 30.0);
+    glVertex2f(70.0, 10.0);
+    glVertex2f(70.0, 10.0);
+    glVertex2f(24.0, 10.0);
+    glVertex2f(24.0, 10.0);
+    glVertex2f(24.0, 30.0);
+    glEnd();
+
+    // Left First Box
+    schoolFieldBox(24, 22, 26, 22, 26, 18, 24, 18);
+
+    // Left Second Box
+    schoolFieldBox(24, 24, 28, 24, 28, 16, 24, 16);
+
+    // Left Second Box Half Moon
+    drawTransparentCircle(28.5, 20, 1.5, 0.0);
+
+    // Left Second Box Half Moon Cover
+    glBegin(GL_QUADS);
+    glColor3ub(134, 255, 51);
+    glVertex2f(26.5, 21.5);
+    glVertex2f(28, 21.5);
+    glVertex2f(28, 18.5);
+    glVertex2f(26.5, 18.5);
+    glEnd();
+
+    // Mid Line
+    glColor3ub(255, 255, 255);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(47, 30);
+    glVertex2f(47, 10);
+    glEnd();
+
+    // Mid Line Circle
+    drawTransparentCircle(47, 20, 1, 0);
+
+    // Right Second Box Half Moon
+    drawTransparentCircle(66.6, 20, 1.5, 0);
+
+    // Right Second Box
+    schoolFieldBox(66.6, 24, 70, 24, 70, 16, 66.6, 16);
+
+    // Right Second Box Half Moon Cover
+    glBegin(GL_QUADS);
+    glColor3ub(134, 255, 51);
+    glVertex2f(66.6, 21.5);
+    glVertex2f(68.2, 21.4);
+    glVertex2f(68.2, 18.4);
+    glVertex2f(66.6, 18.5);
+    glEnd();
+
+    // Right First Box
+    schoolFieldBox(68.6, 22, 70, 22, 70, 18, 68.6, 18);
+}
+
+
+// Draw Window for School Building ----- Avizit Roy
+void drawWindow(float a, float b, float c, float d, float e, float f, float g, float h) {
+    // Window
+    glColor3ub(56,100,127);
+    glBegin(GL_QUADS);
+    glVertex2f(a, b);
+    glVertex2f(c, d);
+    glVertex2f(e, f);
+    glVertex2f(g, h);
+    glEnd();
+
+    // Window Outline
+    glColor3ub(255, 255, 255);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(a, b);
+    glVertex2f(c, d);
+    glVertex2f(c, d);
+    glVertex2f(e, f);
+    glVertex2f(e, f);
+    glVertex2f(g, h);
+    glVertex2f(g, h);
+    glVertex2f(a, b);
+    glEnd();
+}
+
+// School Building ----- Avizit Roy
+void schoolBuilding() {
+
+    // Main Frame
+    glBegin(GL_QUADS);
+    glColor3ub(255,192,73);
+    glVertex2f(25, 62);
+    glVertex2f(70, 62);
+    glVertex2f(70, 40);
+    glVertex2f(25, 40);
+    glEnd();
+
+    // Main Frame Top 1
+    glBegin(GL_QUADS);
+    glColor3ub(193,61,33);
+    glVertex2f(24.2, 62.5);
+    glVertex2f(24.2, 62);
+    glVertex2f(71, 62);
+    glVertex2f(71, 62.5);
+    glEnd();
+
+    // Main Frame Top 2
+    glBegin(GL_QUADS);
+    glColor3ub(252,94,58);
+    glVertex2f(71, 64);
+    glVertex2f(71, 62.5);
+    glVertex2f(24.2, 62.5);
+    glVertex2f(24.2, 64);
+    glEnd();
+
+    // Center Frame
+    glBegin(GL_QUADS);
+    glColor3ub(254,226,166);
+    glVertex2f(40, 65);
+    glVertex2f(56, 65);
+    glVertex2f(56, 40);
+    glVertex2f(40, 40);
+    glEnd();
+
+    // Center Frame Top 1
+    glBegin(GL_QUADS);
+    glColor3ub(193,61,33);
+    glVertex2f(39, 65.5);
+    glVertex2f(39, 65);
+    glVertex2f(57, 65);
+    glVertex2f(57, 65.5);
+    glEnd();
+
+    // Center Frame Top 2
+    glBegin(GL_QUADS);
+    glColor3ub(252,94,58);
+    glVertex2f(57, 67);
+    glVertex2f(57, 65.5);
+    glVertex2f(39, 65.5);
+    glVertex2f(39, 67);
+    glEnd();
+
+    // Entrace
+
+    // Entrance Left Pillar
+    glBegin(GL_QUADS);
+    glColor3ub(255,255,255);
+    glVertex2f(42, 46);
+    glVertex2f(42.5, 46);
+    glVertex2f(42.5, 40);
+    glVertex2f(42, 40);
+    glEnd();
+
+    // Entrance Right Pillar
+    glBegin(GL_QUADS);
+    glColor3ub(255,255,255);
+    glVertex2f(53.5, 46);
+    glVertex2f(54, 46);
+    glVertex2f(54, 40);
+    glVertex2f(53.5, 40);
+    glEnd();
+
+    // Entrance Top
+    glBegin(GL_QUADS);
+    glColor3ub(252,94,58);
+    glVertex2f(41.5, 47);
+    glVertex2f(54.5, 47);
+    glVertex2f(54.5, 46);
+    glVertex2f(41.5, 46);
+    glEnd();
+
+    // Left Door Frame
+    glBegin(GL_QUADS);
+    glColor3ub(109,53,59);
+    glVertex2f(43, 45);
+    glVertex2f(47, 45);
+    glVertex2f(47, 40);
+    glVertex2f(43, 40);
+    glEnd();
+
+    // Left Door 1
+    glBegin(GL_QUADS);
+    glColor3ub(56,100,127);
+    glVertex2f(43.2, 44.8);
+    glVertex2f(44.7, 44.8);
+    glVertex2f(44.7, 40);
+    glVertex2f(43.2, 40);
+    glEnd();
+
+    // Left Door 2
+    glBegin(GL_QUADS);
+    glColor3ub(56,100,127);
+    glVertex2f(45.3, 44.8);
+    glVertex2f(46.7, 44.8);
+    glVertex2f(46.7, 40);
+    glVertex2f(45.3, 40);
+    glEnd();
+
+    // Right Door Frame
+    glBegin(GL_QUADS);
+    glColor3ub(109,53,59);
+    glVertex2f(49, 45);
+    glVertex2f(53, 45);
+    glVertex2f(53, 40);
+    glVertex2f(49, 40);
+    glEnd();
+
+    // Right Door 1
+    glBegin(GL_QUADS);
+    glColor3ub(56,100,127);
+    glVertex2f(49.2, 44.8);
+    glVertex2f(50.8, 44.8);
+    glVertex2f(50.8, 40);
+    glVertex2f(49.2, 40);
+    glEnd();
+
+    // Right Door 2
+    glBegin(GL_QUADS);
+    glColor3ub(56,100,127);
+    glVertex2f(51.2, 44.8);
+    glVertex2f(52.8, 44.8);
+    glVertex2f(52.8, 40);
+    glVertex2f(51.2, 40);
+    glEnd();
+
+    // Left Side Windows
+    drawWindow(26, 61, 29, 61, 29, 57, 26, 57);
+    drawWindow(31, 61, 34, 61, 34,57,31,57);
+    drawWindow(36,61,39,61,39,57,36,57);
+    drawWindow(26,53,29,53,29,49,26,49);
+    drawWindow(31,53,34,53,34,49,31,49);
+    drawWindow(36,53,39,53,39,49,36,49);
+    drawWindow(26,45,29,45,29,41,26,41);
+    drawWindow(31,45,34,45,34,41,31,41);
+    drawWindow(36,45,39,45,39,41,36,41);
+
+    // Center Windows
+    drawWindow(41,64,44,64,44,60,41,60);
+    drawWindow(46.5,64,49.5,64,49.5,60,46.5,60);
+    drawWindow(52,64,55,64,55,60,52,60);
+    drawWindow(41,58,44,58,44,54,41,54);
+    drawWindow(46.5,58,49.5,58,49.5,54,46.5,54);
+    drawWindow(52,58,55,58,55,54,52,54);
+    drawWindow(41,52,44,52,44,48,41,48);
+    drawWindow(46.5,52,49.5,52,49.5,48,46.5,48);
+    drawWindow(52,52,55,52,55,48,52,48);
+
+    // Right Side Windows
+    drawWindow(57,61,60,61,60,57,57,57);
+    drawWindow(61.5,61,64.5,61,64.5,57,61.5,57);
+    drawWindow(66,61,69,61,69,57,66,57);
+    drawWindow(57,53,60,53,60,49,57,49);
+    drawWindow(61.5,53,64.5,53,64.5,49,61.5,49);
+    drawWindow(66,53,69,53,69,49,66,49);
+    drawWindow(57,45,60,45,60,41,57,41);
+    drawWindow(61.5,45,64.5,45,64.5,41,61.5,41);
+    drawWindow(66,45,69,45,69,41,66,41);
+
+    // Base
+    glBegin(GL_QUADS);
+    glColor3ub(174,84,55);
+    glVertex2f(24, 40);
+    glVertex2f(24, 39);
+    glVertex2f(71, 39);
+    glVertex2f(71, 40);
+    glEnd();
+}
+
+
+// Flag Pole ----- Avizit Roy
+void flagPole() {
+    // Base
+    glBegin(GL_POLYGON);
+    glColor3ub(174,84,55);
+    glVertex2f(34.6, 37);
+    glVertex2f(35.7, 37);
+    glVertex2f(35.7, 36.6);
+    glVertex2f(36.2, 36.6);
+    glVertex2f(36.2, 36.2);
+    glVertex2f(34.1, 36.2);
+    glVertex2f(34.1, 36.6);
+    glVertex2f(34.6, 36.6);
+    glVertex2f(34.6, 37);
+    glEnd();
+
+    // Pole
+    glBegin(GL_QUADS);
+    glColor3ub(0,0,0);
+    glVertex2f(35, 37);
+    glVertex2f(35.3, 37);
+    glVertex2f(35.3, 47.2);
+    glVertex2f(35, 47.2);
+    glEnd();
+
+    // Flag
+    glBegin(GL_QUADS);
+    glColor3ub(0,255,0);
+    glVertex2f(35.4, 47);
+    glVertex2f(38.5, 47);
+    glVertex2f(38.5, 45);
+    glVertex2f(35.4, 45);
+    glEnd();
+
+    circle(0.5, 37, 46, 255, 0, 0);
+}
+
+
+
+
+
 void display() {
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
     glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
@@ -1338,8 +1883,8 @@ void display() {
     road();
     road_mid_line(180,180,180);
     car1(188, 0, 0);
-    car2(255, 216, 0);
     lamp_post();
+
     grass(-106, -66);
     grass(-95, -66);
     grass(-100, -64);
@@ -1347,6 +1892,9 @@ void display() {
     grass(-104, -71);
 
     grass(-91, -68);
+
+    cloud1(231, 231, 231);
+    cloud2(231, 231, 231);
 
 
     boat1();
@@ -1357,6 +1905,19 @@ void display() {
     house1(0, 179, 200);
     house2(99, 0, 91);
     tree1(121, 105, 0);
+    sun(223, 234, 0);
+
+
+
+    schoolRoad();
+    schoolField();
+    schoolBuilding();
+    flagPole();
+
+lamp_post_2();
+    car2(255, 216, 0);
+
+
 
 
 
@@ -1377,6 +1938,9 @@ int main(int argc, char** argv) {
     glutTimerFunc(100, boat_animation_2, 0);
     glutTimerFunc(100, car_animation_1, 0);
     glutTimerFunc(100, car_animation_2, 0);
+    glutTimerFunc(100, cloud_animation_1, 0);
+    glutTimerFunc(100, cloud_animation_2, 0);
+    glutTimerFunc(100, sun_animation, 0);
 
     gluOrtho2D(-110.0, 110.0, -70.0, 90.0);
     glutMainLoop();           // Enter the event-processing loop

@@ -2357,6 +2357,31 @@ void display() {
     glFlush();  // Render now
 }
 
+void handleKeypress(unsigned char key, int x, int y) {
+	switch (key) {
+        case 'n':
+            glutDisplayFunc(display_night);
+            break;
+        case 'N':
+            glutDisplayFunc(display_night);
+            break;
+        case 'd':
+            glutDisplayFunc(display);
+            break;
+        case 'D':
+            glutDisplayFunc(display);
+            break;
+        case 'r':
+            glutDisplayFunc(display_rain);
+            break;
+        case 'R':
+            glutDisplayFunc(display_rain);
+            break;
+        glutPostRedisplay();
+    }
+
+}
+
 
 // Mouse Event ----- Avizit Roy
 void handleMouse(int button, int state, int x, int y) {
@@ -2398,7 +2423,7 @@ int main(int argc, char** argv) {
     // Rain ----- Avizit Roy
     glutTimerFunc(25, rain_animation, 0); // Call update function after 25 milliseconds
 
-    
+    glutKeyboardFunc(handleKeypress);
     glutMouseFunc(handleMouse);
 
     gluOrtho2D(-110.0, 110.0, -70.0, 90.0);

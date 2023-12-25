@@ -2177,6 +2177,8 @@ void display_night() {
     schoolField();
     schoolBuilding();
     flagPole();
+    factory();
+    drawWindmill();
 
     lamp_post_2_night();
     car2(255, 216, 0);

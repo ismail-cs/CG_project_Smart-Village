@@ -1,4 +1,8 @@
+
+
 //#include <windows.h>  // for MS Windows
+
+
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include <math.h>
 #include<cstdio>
@@ -23,6 +27,17 @@ GLfloat speed = 1.0f;
 GLfloat car2_position_x = -40.0f;
 GLfloat car2_position_y = 1.0f;
 GLfloat car_2_speed = 2.0f;
+
+
+
+GLfloat cloud1_position_x = 65.0f;
+GLfloat cloud_1_speed = 0.6f;
+
+GLfloat cloud2_position_x = 65.0f;
+GLfloat cloud_2_speed = 0.8f;
+
+GLfloat sun_position_y = 40.0f;
+GLfloat sun_speed = 1.0f;
 
 void display();
 
@@ -91,6 +106,47 @@ void car_animation_2(int value) {
 
 
 
+void cloud_animation_1(int value) {
+
+    if(cloud1_position_x <-190.0)
+        cloud1_position_x = 70.0f;
+
+    cloud1_position_x -= cloud_1_speed;
+
+	glutPostRedisplay();
+
+	glutTimerFunc(100,cloud_animation_1,0);
+}
+
+void cloud_animation_2(int value) {
+
+    if(cloud2_position_x <-190.0)
+        cloud2_position_x = 70.0f;
+
+    cloud2_position_x -= cloud_2_speed;
+
+	glutPostRedisplay();
+
+	glutTimerFunc(100,cloud_animation_2,0);
+}
+
+
+void sun_animation(int value) {
+
+    if(sun_position_y > 98.0){
+        sun_position_y = 40.0f;
+    }
+
+
+    sun_position_y += sun_speed;
+
+	glutPostRedisplay();
+
+	glutTimerFunc(100,sun_animation,0);
+}
+
+
+
 void disback(int val)
 {
     glutDisplayFunc(display);
@@ -106,8 +162,7 @@ void disback(int val)
 
 
 
-void circle(float radius, float xc, float yc, float r, float g, float b)
-{
+void circle(float radius, float xc, float yc, float r, float g, float b){
     glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
     for(int i=0;i<200;i++)
         {
@@ -123,7 +178,7 @@ void circle(float radius, float xc, float yc, float r, float g, float b)
 }
 
 
-// Draw Transparent Circle with White Outline ----- Avizit Roy
+
 void drawTransparentCircle(float x, float y, float radius, float transparency) {
     int numSegments = 100;
     glBegin(GL_TRIANGLE_FAN);
@@ -343,6 +398,43 @@ void lamp_post(){
         x += 10;
         if(j%2==0){
             y++;
+        }
+
+    }
+}
+
+
+
+void lamp_post_2(){
+
+    int x = -103.4, y= -1.9;
+
+    for(int i =0, j=0; i<22; i++, j++){
+
+        glBegin(GL_POLYGON);   // main line
+        glColor3ub(59, 81, 0);
+            glVertex2f(x, y);
+            glVertex2f(x+0.6, y);
+            glVertex2f(x+1, y+3.7);
+            glVertex2f(x+0.4, y+3.7);
+        glEnd();
+
+        circle(0.366, x+2, y+4.4, 130, 120, 0);  // light
+
+
+
+        glBegin(GL_POLYGON);   // up line
+        glColor3ub(59, 81, 0);
+            glVertex2f(x+0.4, y+3.7);
+            glVertex2f(x+1, y+3.7);
+            glVertex2f(x+2.2, y+4.9);
+            glVertex2f(x+1.6, y+4.9);
+        glEnd();
+
+        x += 10;
+        if(j==5){
+            y+=1;
+            j=0;
         }
 
     }
@@ -1086,56 +1178,319 @@ void house1(int r, int g, int b){
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(r, g, b);
-        glVertex2f(-81, 51.5);
-        glVertex2f(-69.4, 50.8);
-        glVertex2f(-76.1, 60);
+        glVertex2f(-81, 41.5);
+        glVertex2f(-69.4, 40.8);
+        glVertex2f(-76.1, 50);
     glEnd();
 
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(164, 0, 137);
-        glVertex2f(-69.4, 50.8);
-        glVertex2f(-52.4, 52);
-        glVertex2f(-59.6, 60.5);
-        glVertex2f(-76.1, 60);
+        glVertex2f(-69.4, 40.8);
+        glVertex2f(-52.4, 42);
+        glVertex2f(-59.6, 50.5);
+        glVertex2f(-76.1, 50);
     glEnd();
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(r, g, b);
-        glVertex2f(-80, 43);
-        glVertex2f(-69.1, 41.8);
-        glVertex2f(-69.4, 50.8);
-        glVertex2f(-80.1 , 51.4);
+        glVertex2f(-80, 33);
+        glVertex2f(-69.1, 31.8);
+        glVertex2f(-69.4, 40.8);
+        glVertex2f(-80.1 , 41.4);
     glEnd();
 
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(r, g, b);
-        glVertex2f(-69.1, 41.8);
-        glVertex2f(-53.38, 43.64);
-        glVertex2f(-53.46, 51.92);
-        glVertex2f(-69.4 , 50.8);
+        glVertex2f(-69.1, 31.8);
+        glVertex2f(-53.38, 33.64);
+        glVertex2f(-53.46, 41.92);
+        glVertex2f(-69.4 , 40.8);
     glEnd();
 
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(121, 105, 0);
-        glVertex2f(-81.1, 41.5);
-        glVertex2f(-69.1, 40.43);
-        glVertex2f(-69.1, 41.8);
-        glVertex2f(-81.1, 43);
+        glVertex2f(-81.1, 31.5);
+        glVertex2f(-69.1, 30.43);
+        glVertex2f(-69.1, 31.8);
+        glVertex2f(-81.1, 33);
     glEnd();
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(121, 105, 0);
-        glVertex2f(-69.1, 40.3);
-        glVertex2f(-52, 42.4);
-        glVertex2f(-52.1, 43.8);
-        glVertex2f(-69.1, 41.8);
+        glVertex2f(-69.1, 30.3);
+        glVertex2f(-52, 32.4);
+        glVertex2f(-52.1, 33.8);
+        glVertex2f(-69.1, 31.8);
     glEnd();
+
+
+
+    glBegin(GL_POLYGON);   // door
+	glColor3ub(212, 122, 0);
+        glVertex2f(-64, 32.39);
+        glVertex2f(-60, 32.87);
+        glVertex2f(-60, 39.5);
+        glVertex2f(-64, 39);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // door
+	glColor3ub(212, 122, 0);
+        glVertex2f(-77, 35);
+        glVertex2f(-73, 34.5);
+        glVertex2f(-73, 38.5);
+        glVertex2f(-77, 39);
+    glEnd();
+
+}
+
+
+void house2(int r, int g, int b){
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(0, 14, 190);
+        glVertex2f(-57, 29.4);
+        glVertex2f(-41.3, 30.5);
+        glVertex2f(-41.3, 38);
+        glVertex2f(-57, 37.09);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(0, 14, 190);
+        glVertex2f(-41.3, 30.5);
+        glVertex2f(-32.8, 33);
+        glVertex2f(-32.8, 39);
+        glVertex2f(-38.2, 45.2);
+        glVertex2f(-40.3, 38);
+        glVertex2f(-41.3, 38);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(r, g, b);
+        glVertex2f(-58.8, 37);
+        glVertex2f(-40.3, 38);
+        glVertex2f(-37.8, 47);
+        glVertex2f(-54.8, 46);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(0, 8, 104);
+        glVertex2f(-38.2, 45.2);
+        glVertex2f(-32.8, 39);
+        glVertex2f(-31.8, 40);
+        glVertex2f(-37.8, 47);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(72, 58, 0);
+        glVertex2f(-57.8, 29.4);
+        glVertex2f(-57.8, 28);
+        glVertex2f(-41.3, 29);
+        glVertex2f(-41.3, 30.5);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(72, 58, 0);
+        glVertex2f(-41.3, 29);
+        glVertex2f(-32, 32);
+        glVertex2f(-32, 33.2);
+        glVertex2f(-41.3, 30.5);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // door
+	glColor3ub(141, 0, 163);
+        glVertex2f(-51.5070, 29.7528);
+        glVertex2f(-48.5013, 30.0199);
+        glVertex2f(-48.5, 35);
+        glVertex2f(-51.5, 35);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // window
+	glColor3ub(0, 120, 2);
+        glVertex2f(-38.2, 34.4);
+        glVertex2f(-36, 34.8);
+        glVertex2f(-36, 37);
+        glVertex2f(-38.2, 36.6);
+    glEnd();
+
+
+
+
 
 
 }
+
+
+void tree1(int r, int g, int b){
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(r, g, b);
+        glVertex2f(-99, 24);
+        glVertex2f(-89, 24);
+        glVertex2f(-91, 44);
+        glVertex2f(-97, 44);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(r, g, b);
+        glVertex2f(-91, 44);
+        glVertex2f(-90.45, 38.54);
+        glVertex2f(-80, 57);
+        glVertex2f(-80, 60);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(r, g, b);
+        glVertex2f(-97, 44);
+        glVertex2f(-91, 44);
+        glVertex2f(-93, 53);
+        glVertex2f(-96, 53);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(r, g, b);
+        glVertex2f(-97, 44);
+        glVertex2f(-96, 53);
+        glVertex2f(-99, 64);
+        glVertex2f(-101, 64);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // main road
+	glColor3ub(r, g, b);
+        glVertex2f(-91, 44);
+        glVertex2f(-87, 64);
+        glVertex2f(-89, 64);
+        glVertex2f(-93, 53);
+    glEnd();
+
+    circle( 6.77, -98, 68, 7, 151, 0);
+    circle( 6.77, -106, 72, 7, 151, 0);
+    circle( 6.77, -106, 64, 7, 151, 0);
+    circle( 6.77, -96, 76, 7, 151, 0);
+
+    circle( 6.77, -72, 60, 7, 151, 0);
+    circle( 6.77, -80, 60, 7, 151, 0);
+    circle( 6.77, -76, 68, 7, 151, 0);
+
+    circle( 6.77, -88, 68, 7, 151, 0);
+    circle( 6.77, -85, 76, 7, 151, 0);
+
+    circle( 6.77, -88, 80, 7, 151, 0);
+
+
+
+}
+
+
+void house_back_side(int r, int g, int b){
+
+    int x = 110;
+
+    for(int i=0; i<21; i++){
+        x -= 4;
+        glBegin(GL_POLYGON);   // main road
+        glColor3ub(r, g, b);
+            glVertex2f(-x, 33.5);
+            glVertex2f(-(x+1),33.5);
+            glVertex2f(-(x+1), 45);
+            glVertex2f(-x, 45);
+        glEnd();
+
+    }
+
+        glBegin(GL_POLYGON);   // main road
+        glColor3ub(182, 140, 0);
+            glVertex2f(-109, 35);
+            glVertex2f(-25,35);
+            glVertex2f(-25, 36);
+            glVertex2f(-109, 36);
+        glEnd();
+
+
+        glBegin(GL_POLYGON);   // main road
+        glColor3ub(182, 140, 0);
+            glVertex2f(-109, 39);
+            glVertex2f(-25,39);
+            glVertex2f(-25, 40);
+            glVertex2f(-109, 40);
+        glEnd();
+
+
+        glBegin(GL_POLYGON);   // main road
+        glColor3ub(182, 140, 0);
+            glVertex2f(-109, 43);
+            glVertex2f(-25,43);
+            glVertex2f(-25, 44);
+            glVertex2f(-109, 44);
+        glEnd();
+
+
+
+
+
+}
+
+
+
+
+void cloud1 (int r, int g, int b){
+
+glPushMatrix();
+glTranslatef(cloud1_position_x,0.0f, 0.0f);
+
+    circle( 4.5, 10, 80, r, g, b);
+    circle( 3, 14, 79, r, g, b);
+    circle( 3, 6, 79, r, g, b);
+
+glPopMatrix();
+
+}
+
+
+
+void cloud2 (int r, int g, int b){
+
+glPushMatrix();
+glTranslatef(cloud2_position_x,0.0f, 0.0f);
+
+    circle( 4.5, 30, 75, r, g, b);
+    circle( 3, 35, 74, r, g, b);
+    circle( 3, 23, 74, r, g, b);
+    circle( 3, 25, 76, r, g, b);
+    circle( 3, 26, 74, r, g, b);
+
+glPopMatrix();
+
+}
+
+
+void sun (int r, int g, int b){
+
+
+//glPushMatrix();
+//glTranslatef(0.0f,sun_position_y, 0.0f);
+
+    circle( 6, 30, 75, r, g, b);
+
+//glPopMatrix();
+
+}
+
+
+
+//==============================================================================================================================================
+
+
+
 
 
 
@@ -1509,10 +1864,205 @@ void flagPole() {
 }
 
 
+// Windmill ----- Avizit Roy
+float angle = 0.0f;
+
+void drawBlade() {
+    glBegin(GL_POLYGON);
+    glVertex2f(13.0, 64.0);
+    glVertex2f(12.0, 70.0);
+    glVertex2f(14.0, 70.0);
+    glEnd();
+}
+
+// Function to draw the windmill ----- Avizit Roy
+void drawWindmill() {
+    glColor3f(0.5, 0.5, 0.5);
+
+    // Draw the pole of the windmill
+    glColor3f(0.3, 0.3, 0.3);
+    glBegin(GL_POLYGON);
+    glVertex2f(12.8, 50.2);
+    glVertex2f(13.2, 50.2);
+    glVertex2f(13.2, 64.0);
+    glVertex2f(12.8, 64.0);
+    glEnd();
+
+    // Draw three blades of the windmill
+    glColor3f(1.0, 1.0, 1.0);
+    glPushMatrix();
+    glTranslatef(13.0, 64.0, 0.0);
+    glRotatef(angle, 0.0, 0.0, 1.0);
+    glTranslatef(-13.0, -64.0, 0.0);
+
+    for (int i = 0; i < 3; ++i) {
+        glPushMatrix();
+        glTranslatef(13.0, 64.0, 0.0);
+        glRotatef(i * 120.0, 0.0, 0.0, 1.0);
+        glTranslatef(-13.0, -64.0, 0.0);
+        drawBlade();
+        glPopMatrix();
+    }
+
+    glPopMatrix();
+}
 
 
-// Windmill
+// Timer function to animate the windmill ----- Avizit Roy
+void windmill_animation(int value) {
+    angle += 2.0f;  // Increment the rotation angle
+    glutPostRedisplay();
+    glutTimerFunc(16, windmill_animation, 0);  // Set the next timer
+}
 
+// Factory Roof Function ----- Avizit Roy
+void factoryRoof(float a, float b, float c, float d, float e, float f, float g, float h) {
+    glColor3ub(61,40,36);
+    glBegin(GL_POLYGON);
+    glVertex2f(a, b);
+    glVertex2f(c, d);
+    glVertex2f(e, f);
+    glVertex2f(g, h);
+    glEnd();
+}
+
+// Factory Main Code ----- Avizit Roy
+void factory() {
+    // Ground Floor
+    glBegin(GL_QUADS);
+    glColor3ub(216,125,82);
+    glVertex2f(78, 25);
+    glVertex2f(78, 10);
+    glVertex2f(108, 10);
+    glVertex2f(108, 25);
+    glEnd();
+
+    // Second Floor
+    glBegin(GL_POLYGON);
+    glColor3ub(216,125,82);
+    glVertex2f(93, 41);
+    glVertex2f(93, 25);
+    glVertex2f(108, 25);
+    glVertex2f(108, 41);
+    glVertex2f(100.5, 46);
+    glEnd();
+
+    // Factory Chimney
+    glBegin(GL_QUADS);
+    glColor3ub(164,182,187);
+    glVertex2f(80, 50);
+    glVertex2f(84, 50);
+    glVertex2f(84, 25);
+    glVertex2f(80, 25);
+    glEnd();
+
+    // Factory Chimney Lines
+    glColor3ub(99,105,104);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(79.5, 50);
+    glVertex2f(84.5, 50);
+    glEnd();
+
+    glColor3ub(99,105,104);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(79.5, 46);
+    glVertex2f(84.5, 46);
+    glEnd();
+
+    glColor3ub(99,105,104);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(79.5, 42);
+    glVertex2f(84.5, 42);
+    glEnd();
+
+    glColor3ub(99,105,104);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(79.5, 38);
+    glVertex2f(84.5, 38);
+    glEnd();
+
+    glColor3ub(99,105,104);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(79.5, 34);
+    glVertex2f(84.5, 34);
+    glEnd();
+
+    glColor3ub(99,105,104);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(79.5, 30);
+    glVertex2f(84.5, 30);
+    glEnd();
+
+    // Ground Floor Roof
+    factoryRoof(78,27,78,25,83,23,83,25);
+    factoryRoof(83,27,83,25,88,23,88,25);
+    factoryRoof(88,27,88,25,93,23,93,25);
+    factoryRoof(93,27,93,25,98,23,98,25);
+    factoryRoof(98,27,98,25,103,23,103,25);
+    factoryRoof(103,27,103,25,108,23,108,25);
+
+    // Ground Floor Windows
+    drawWindow(82,20,86,20,86,14,82,14);
+    drawWindow(88,20,92,20,92,14,88,14);
+    drawWindow(94,20,98,20,98,14,94,14);
+    drawWindow(100,20,104,20,104,14,100,14);
+
+    // Second Floor Roof
+    glBegin(GL_POLYGON);
+    glColor3ub(61,40,36);
+    glVertex2f(93, 41);
+    glVertex2f(100.5, 46);
+    glVertex2f(108, 41);
+    glVertex2f(108, 41.5);
+    glVertex2f(100.5, 46.5);
+    glVertex2f(93, 41.5);
+    glEnd();
+
+    // Second Floor Window
+    glBegin(GL_QUADS);
+    glColor3ub(93,73,83);
+    glVertex2f(97, 37);
+    glVertex2f(97, 30);
+    glVertex2f(103, 30);
+    glVertex2f(103, 37);
+    glEnd();
+
+    circle(3, 100, 37, 93, 73, 83);
+
+    glColor3ub(255, 255, 255);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(100, 39.5);
+    glVertex2f(100.0, 30.0);
+    glEnd();
+
+    glColor3ub(255, 255, 255);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(97, 32.0);
+    glVertex2f(103.0, 32.0);
+    glEnd();
+
+    glColor3ub(255, 255, 255);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(97, 35.0);
+    glVertex2f(103.0, 35.0);
+    glEnd();
+
+    glColor3ub(255, 255, 255);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(97, 37.0);
+    glVertex2f(103.0, 37.0);
+    glEnd();
+}
 
 
 
@@ -1533,8 +2083,8 @@ void display() {
     road();
     road_mid_line(180,180,180);
     car1(188, 0, 0);
-    car2(255, 216, 0);
     lamp_post();
+
     grass(-106, -66);
     grass(-95, -66);
     grass(-100, -64);
@@ -1543,16 +2093,37 @@ void display() {
 
     grass(-91, -68);
 
+    cloud1(231, 231, 231);
+    cloud2(231, 231, 231);
+
 
     boat1();
 
     boat2();
-    house1(0, 179, 200);
 
+    house_back_side(212, 164, 0);
+    house1(0, 179, 200);
+    house2(99, 0, 91);
+    tree1(121, 105, 0);
+    sun(223, 234, 0);
+
+
+    // Avizit Roy
     schoolRoad();
     schoolField();
     schoolBuilding();
     flagPole();
+    factory();
+    drawWindmill();
+
+
+
+
+    lamp_post_2();
+    car2(255, 216, 0);
+
+
+
 
 
 
@@ -1570,11 +2141,21 @@ int main(int argc, char** argv) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable( GL_BLEND );
 
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+
     glutDisplayFunc(display);// Register display callback handler for window re-paint
     glutTimerFunc(100, boat_animation_1, 0);
     glutTimerFunc(100, boat_animation_2, 0);
     glutTimerFunc(100, car_animation_1, 0);
     glutTimerFunc(100, car_animation_2, 0);
+    glutTimerFunc(100, cloud_animation_1, 0);
+    glutTimerFunc(100, cloud_animation_2, 0);
+    glutTimerFunc(100, sun_animation, 0);
+
+    // Windmill ----- Avizit Roy
+    glutTimerFunc(0, windmill_animation, 0);
 
     gluOrtho2D(-110.0, 110.0, -70.0, 90.0);
     glutMainLoop();           // Enter the event-processing loop

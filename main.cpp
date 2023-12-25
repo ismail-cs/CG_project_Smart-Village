@@ -2131,6 +2131,17 @@ void display() {
 }
 
 
+// Mouse Event ----- Avizit Roy
+void handleMouse(int button, int state, int x, int y) {
+	if (button == GLUT_LEFT_BUTTON) {
+        glutDisplayFunc(display_night);
+	}
+    if (button == GLUT_RIGHT_BUTTON) {
+        glutDisplayFunc(display);
+    }
+    glutPostRedisplay();
+}
+
 
 /* Main function: GLUT runs as a console application starting at main()  */
 int main(int argc, char** argv) {
@@ -2156,6 +2167,9 @@ int main(int argc, char** argv) {
 
     // Windmill ----- Avizit Roy
     glutTimerFunc(0, windmill_animation, 0);
+
+    
+    glutMouseFunc(handleMouse);
 
     gluOrtho2D(-110.0, 110.0, -70.0, 90.0);
     glutMainLoop();           // Enter the event-processing loop

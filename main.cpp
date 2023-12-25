@@ -6,6 +6,7 @@
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include <math.h>
 #include<cstdio>
+#include <vector>
 using namespace std;
 
 
@@ -2188,6 +2189,8 @@ void display_rain() {
     schoolField();
     schoolBuilding();
     flagPole();
+    factory();
+    drawWindmill();
 
     lamp_post_2_night();
     car2(255, 216, 0);
@@ -2219,7 +2222,7 @@ void display_rain() {
 }
 
 // Function to update the position of raindrops
-void update(int value) {
+void rain_animation(int value) {
     for (auto& raindrop : raindrops) {
         // Update y-coordinate of raindrop
         raindrop.y -= raindrop.speed;
@@ -2234,7 +2237,7 @@ void update(int value) {
     glutPostRedisplay();
 
     // Call update function again after 16 milliseconds (60 FPS)
-    glutTimerFunc(30, update, 0);
+    glutTimerFunc(30, rain_animation, 0);
 }
 
 
@@ -2393,7 +2396,7 @@ int main(int argc, char** argv) {
     glutTimerFunc(0, windmill_animation, 0);
 
     // Rain ----- Avizit Roy
-    glutTimerFunc(25, update, 0); // Call update function after 25 milliseconds
+    glutTimerFunc(25, rain_animation, 0); // Call update function after 25 milliseconds
 
     
     glutMouseFunc(handleMouse);

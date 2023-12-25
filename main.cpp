@@ -1,4 +1,5 @@
 
+
 //#include <windows.h>  // for MS Windows
 
 
@@ -1277,7 +1278,7 @@ void house_back_side(int r, int g, int b){
 
     int x = 110;
 
-    for(int i=0; i<25; i++){
+    for(int i=0; i<21; i++){
         x -= 4;
         glBegin(GL_POLYGON);   // main road
         glColor3ub(r, g, b);
@@ -1292,8 +1293,8 @@ void house_back_side(int r, int g, int b){
         glBegin(GL_POLYGON);   // main road
         glColor3ub(182, 140, 0);
             glVertex2f(-109, 35);
-            glVertex2f(-8,35);
-            glVertex2f(-8, 36);
+            glVertex2f(-25,35);
+            glVertex2f(-25, 36);
             glVertex2f(-109, 36);
         glEnd();
 
@@ -1301,8 +1302,8 @@ void house_back_side(int r, int g, int b){
         glBegin(GL_POLYGON);   // main road
         glColor3ub(182, 140, 0);
             glVertex2f(-109, 39);
-            glVertex2f(-8,39);
-            glVertex2f(-8, 40);
+            glVertex2f(-25,39);
+            glVertex2f(-25, 40);
             glVertex2f(-109, 40);
         glEnd();
 
@@ -1310,8 +1311,8 @@ void house_back_side(int r, int g, int b){
         glBegin(GL_POLYGON);   // main road
         glColor3ub(182, 140, 0);
             glVertex2f(-109, 43);
-            glVertex2f(-8,43);
-            glVertex2f(-8, 44);
+            glVertex2f(-25,43);
+            glVertex2f(-25, 44);
             glVertex2f(-109, 44);
         glEnd();
 

@@ -1,5 +1,6 @@
 
 
+
 //#include <windows.h>  // for MS Windows
 
 
@@ -1866,13 +1867,63 @@ void flagPole() {
 
 
 
+void display_night() {
 
-void display() {
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
     glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
     glLineWidth(7.5);
 
+    fild(64, 200, 0);
+    river(168, 241, 255);
+    river_wave(147, 224, 240);
+    sky(61, 96, 112);
+    up_fild(94, 250, 89);
 
+    road();
+    road_mid_line(180,180,180);
+    car1(188, 0, 0);
+    lamp_post();
+
+    grass(-106, -66);
+    grass(-95, -66);
+    grass(-100, -64);
+    grass(-111, -70);
+    grass(-104, -71);
+
+    grass(-91, -68);
+    sun(223, 234, 0);
+    cloud1(231, 231, 231);
+    cloud2(231, 231, 231);
+
+    boat1();
+
+    boat2();
+
+    house_back_side(212, 164, 0);
+    house1(0, 179, 200);
+    house2(99, 0, 91);
+    tree1(121, 105, 0);
+
+    schoolRoad();
+    schoolField();
+    schoolBuilding();
+    flagPole();
+
+    lamp_post_2();
+    car2(255, 216, 0);
+
+
+    glFlush();  // Render now
+}
+
+
+
+
+void display() {
+
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
+    glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
+    glLineWidth(7.5);
 
     fild(64, 200, 0);
     river(168, 241, 255);
@@ -1892,10 +1943,9 @@ void display() {
     grass(-104, -71);
 
     grass(-91, -68);
-
+    sun(223, 234, 0);
     cloud1(231, 231, 231);
     cloud2(231, 231, 231);
-
 
     boat1();
 
@@ -1905,24 +1955,39 @@ void display() {
     house1(0, 179, 200);
     house2(99, 0, 91);
     tree1(121, 105, 0);
-    sun(223, 234, 0);
-
-
 
     schoolRoad();
     schoolField();
     schoolBuilding();
     flagPole();
 
-lamp_post_2();
+    lamp_post_2();
     car2(255, 216, 0);
 
 
-
-
-
-
     glFlush();  // Render now
+}
+
+
+
+
+void handleKeypress(unsigned char key, int x, int y) {
+	switch (key) {
+        case 'n':
+            glutDisplayFunc(display_night);
+            break;
+        case 'N':
+            glutDisplayFunc(display_night);
+            break;
+        case 'd':
+            glutDisplayFunc(display);
+            break;
+        case 'D':
+            glutDisplayFunc(display);
+            break;
+        glutPostRedisplay();
+    }
+
 }
 
 
@@ -1941,6 +2006,8 @@ int main(int argc, char** argv) {
     glutTimerFunc(100, cloud_animation_1, 0);
     glutTimerFunc(100, cloud_animation_2, 0);
     glutTimerFunc(100, sun_animation, 0);
+
+    glutKeyboardFunc(handleKeypress);
 
     gluOrtho2D(-110.0, 110.0, -70.0, 90.0);
     glutMainLoop();           // Enter the event-processing loop

@@ -2136,6 +2136,110 @@ void factory() {
 }
 
 
+
+// Rain Simulation ----- Avizit Roy
+struct Raindrop {
+    float x, y, speed;
+
+    Raindrop(float x, float y, float speed) : x(x), y(y), speed(speed) {}
+};
+
+vector<Raindrop> raindrops; // Vector to store raindrops
+
+
+
+void display_rain() {
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
+    glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
+    glLineWidth(7.5);
+
+    fild(64, 200, 0);
+    river(168, 241, 255);
+    river_wave(147, 224, 240);
+    sky(61, 96, 112);
+    up_fild(94, 250, 89);
+
+    road();
+    road_mid_line(180,180,180);
+    car1(188, 0, 0);
+    lamp_post_night();
+
+    grass(-106, -66);
+    grass(-95, -66);
+    grass(-100, -64);
+    grass(-111, -70);
+    grass(-104, -71);
+
+    grass(-91, -68);
+    sun(223, 234, 0);
+    cloud1(231, 231, 231);
+    cloud2(231, 231, 231);
+
+    boat1();
+
+    boat2();
+
+    house_back_side(212, 164, 0);
+    house1(0, 179, 200);
+    house2(99, 0, 91);
+    tree1(121, 105, 0);
+
+    schoolRoad();
+    schoolField();
+    schoolBuilding();
+    flagPole();
+
+    lamp_post_2_night();
+    car2(255, 216, 0);
+
+
+
+
+    // Draw raindrops
+    glColor3f(1.0, 1.0, 1.0); // White color for raindrops
+    glPointSize(2.0);
+
+    glBegin(GL_POINTS);
+    for (const auto& raindrop : raindrops) {
+        glVertex2f(raindrop.x, raindrop.y);
+    }
+    glEnd();
+
+    // Initialize a few raindrops
+    for (int i = 0; i < 10; ++i) {
+        float speed = static_cast<float>(rand() % 2 + 1);
+        raindrops.push_back(Raindrop(rand() % 220 - 110, rand() % 230 - 70, speed));
+    }
+
+
+
+
+
+    glFlush();  // Render now
+}
+
+// Function to update the position of raindrops
+void update(int value) {
+    for (auto& raindrop : raindrops) {
+        // Update y-coordinate of raindrop
+        raindrop.y -= raindrop.speed;
+
+        // Reset raindrop position if it goes out of the screen
+        if (raindrop.y < 0) {
+            raindrop.y = 600.0; // Reset to the top of the screen
+        }
+    }
+
+    // Redraw the scene
+    glutPostRedisplay();
+
+    // Call update function again after 16 milliseconds (60 FPS)
+    glutTimerFunc(30, update, 0);
+}
+
+
+
+
 void display_night() {
 
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
@@ -2257,7 +2361,7 @@ void handleMouse(int button, int state, int x, int y) {
         glutDisplayFunc(display_night);
 	}
     if (button == GLUT_RIGHT_BUTTON) {
-        glutDisplayFunc(display);
+        glutDisplayFunc(display_rain);
     }
     glutPostRedisplay();
 }
@@ -2287,6 +2391,9 @@ int main(int argc, char** argv) {
 
     // Windmill ----- Avizit Roy
     glutTimerFunc(0, windmill_animation, 0);
+
+    // Rain ----- Avizit Roy
+    glutTimerFunc(25, update, 0); // Call update function after 25 milliseconds
 
     
     glutMouseFunc(handleMouse);

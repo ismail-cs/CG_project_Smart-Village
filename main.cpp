@@ -1,8 +1,4 @@
-
-
 //#include <windows.h>  // for MS Windows
-
-
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include <math.h>
 #include<cstdio>
@@ -123,6 +119,35 @@ void circle(float radius, float xc, float yc, float r, float g, float b)
             float y = r * sin(A);
             glVertex2f(x+xc,y+yc);
         }
+    glEnd();
+}
+
+
+// Draw Transparent Circle with White Outline ----- Avizit Roy
+void drawTransparentCircle(float x, float y, float radius, float transparency) {
+    int numSegments = 100;
+    glBegin(GL_TRIANGLE_FAN);
+    glColor4f(1.0f, 1.0f, 1.0f, transparency); // White color with transparency
+
+    for (int i = 0; i <= numSegments; i++) {
+        float theta = 2.0f * 3.1415926f * float(i) / float(numSegments);
+        float dx = radius * cosf(theta);
+        float dy = radius * sinf(theta);
+        glVertex2f(x + dx, y + dy);
+    }
+
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);
+    glColor3f(1.0f, 1.0f, 1.0f); // White color for the outline
+
+    for (int i = 0; i <= numSegments; i++) {
+        float theta = 2.0f * 3.1415926f * float(i) / float(numSegments);
+        float dx = radius * cosf(theta);
+        float dy = radius * sinf(theta);
+        glVertex2f(x + dx, y + dy);
+    }
+
     glEnd();
 }
 
@@ -1061,266 +1086,436 @@ void house1(int r, int g, int b){
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(r, g, b);
-        glVertex2f(-81, 41.5);
-        glVertex2f(-69.4, 40.8);
-        glVertex2f(-76.1, 50);
+        glVertex2f(-81, 51.5);
+        glVertex2f(-69.4, 50.8);
+        glVertex2f(-76.1, 60);
     glEnd();
 
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(164, 0, 137);
-        glVertex2f(-69.4, 40.8);
-        glVertex2f(-52.4, 42);
-        glVertex2f(-59.6, 50.5);
-        glVertex2f(-76.1, 50);
+        glVertex2f(-69.4, 50.8);
+        glVertex2f(-52.4, 52);
+        glVertex2f(-59.6, 60.5);
+        glVertex2f(-76.1, 60);
     glEnd();
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(r, g, b);
-        glVertex2f(-80, 33);
-        glVertex2f(-69.1, 31.8);
-        glVertex2f(-69.4, 40.8);
-        glVertex2f(-80.1 , 41.4);
+        glVertex2f(-80, 43);
+        glVertex2f(-69.1, 41.8);
+        glVertex2f(-69.4, 50.8);
+        glVertex2f(-80.1 , 51.4);
     glEnd();
 
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(r, g, b);
-        glVertex2f(-69.1, 31.8);
-        glVertex2f(-53.38, 33.64);
-        glVertex2f(-53.46, 41.92);
-        glVertex2f(-69.4 , 40.8);
+        glVertex2f(-69.1, 41.8);
+        glVertex2f(-53.38, 43.64);
+        glVertex2f(-53.46, 51.92);
+        glVertex2f(-69.4 , 50.8);
     glEnd();
 
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(121, 105, 0);
-        glVertex2f(-81.1, 31.5);
-        glVertex2f(-69.1, 30.43);
-        glVertex2f(-69.1, 31.8);
-        glVertex2f(-81.1, 33);
+        glVertex2f(-81.1, 41.5);
+        glVertex2f(-69.1, 40.43);
+        glVertex2f(-69.1, 41.8);
+        glVertex2f(-81.1, 43);
     glEnd();
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(121, 105, 0);
-        glVertex2f(-69.1, 30.3);
-        glVertex2f(-52, 32.4);
-        glVertex2f(-52.1, 33.8);
-        glVertex2f(-69.1, 31.8);
+        glVertex2f(-69.1, 40.3);
+        glVertex2f(-52, 42.4);
+        glVertex2f(-52.1, 43.8);
+        glVertex2f(-69.1, 41.8);
     glEnd();
-
-
-
-    glBegin(GL_POLYGON);   // door
-	glColor3ub(212, 122, 0);
-        glVertex2f(-64, 32.39);
-        glVertex2f(-60, 32.87);
-        glVertex2f(-60, 39.5);
-        glVertex2f(-64, 39);
-    glEnd();
-
-
-    glBegin(GL_POLYGON);   // door
-	glColor3ub(212, 122, 0);
-        glVertex2f(-77, 35);
-        glVertex2f(-73, 34.5);
-        glVertex2f(-73, 38.5);
-        glVertex2f(-77, 39);
-    glEnd();
-
-}
-
-
-void house2(int r, int g, int b){
-
-    glBegin(GL_POLYGON);   // main road
-	glColor3ub(0, 14, 190);
-        glVertex2f(-57, 29.4);
-        glVertex2f(-41.3, 30.5);
-        glVertex2f(-41.3, 38);
-        glVertex2f(-57, 37.09);
-    glEnd();
-
-
-    glBegin(GL_POLYGON);   // main road
-	glColor3ub(0, 14, 190);
-        glVertex2f(-41.3, 30.5);
-        glVertex2f(-32.8, 33);
-        glVertex2f(-32.8, 39);
-        glVertex2f(-38.2, 45.2);
-        glVertex2f(-40.3, 38);
-        glVertex2f(-41.3, 38);
-    glEnd();
-
-
-    glBegin(GL_POLYGON);   // main road
-	glColor3ub(r, g, b);
-        glVertex2f(-58.8, 37);
-        glVertex2f(-40.3, 38);
-        glVertex2f(-37.8, 47);
-        glVertex2f(-54.8, 46);
-    glEnd();
-
-    glBegin(GL_POLYGON);   // main road
-	glColor3ub(0, 8, 104);
-        glVertex2f(-38.2, 45.2);
-        glVertex2f(-32.8, 39);
-        glVertex2f(-31.8, 40);
-        glVertex2f(-37.8, 47);
-    glEnd();
-
-
-    glBegin(GL_POLYGON);   // main road
-	glColor3ub(72, 58, 0);
-        glVertex2f(-57.8, 29.4);
-        glVertex2f(-57.8, 28);
-        glVertex2f(-41.3, 29);
-        glVertex2f(-41.3, 30.5);
-    glEnd();
-
-
-    glBegin(GL_POLYGON);   // main road
-	glColor3ub(72, 58, 0);
-        glVertex2f(-41.3, 29);
-        glVertex2f(-32, 32);
-        glVertex2f(-32, 33.2);
-        glVertex2f(-41.3, 30.5);
-    glEnd();
-
-
-    glBegin(GL_POLYGON);   // door
-	glColor3ub(141, 0, 163);
-        glVertex2f(-51.5070, 29.7528);
-        glVertex2f(-48.5013, 30.0199);
-        glVertex2f(-48.5, 35);
-        glVertex2f(-51.5, 35);
-    glEnd();
-
-    glBegin(GL_POLYGON);   // window
-	glColor3ub(0, 120, 2);
-        glVertex2f(-38.2, 34.4);
-        glVertex2f(-36, 34.8);
-        glVertex2f(-36, 37);
-        glVertex2f(-38.2, 36.6);
-    glEnd();
-
-
-
-
 
 
 }
 
 
-void tree1(int r, int g, int b){
 
-    glBegin(GL_POLYGON);   // main road
-	glColor3ub(r, g, b);
-        glVertex2f(-99, 24);
-        glVertex2f(-89, 24);
-        glVertex2f(-91, 44);
-        glVertex2f(-97, 44);
+
+// School Road ----- Avizit Roy
+void schoolRoad() {
+    // Right Road
+    glBegin(GL_POLYGON);
+    glColor3ub(180, 180, 180);
+    glVertex2f(75.8229, 1.22324);
+    glVertex2f(76, 36);
+    glVertex2f(72, 32);
+    glVertex2f(71.8025, 1.1318);
     glEnd();
 
-    glBegin(GL_POLYGON);   // main road
-	glColor3ub(r, g, b);
-        glVertex2f(-91, 44);
-        glVertex2f(-90.45, 38.54);
-        glVertex2f(-80, 57);
-        glVertex2f(-80, 60);
+    // Center Road
+    glBegin(GL_POLYGON);
+    glColor3ub(180, 180, 180);
+    glVertex2f(76, 36);
+    glVertex2f(18, 36);
+    glVertex2f(22, 32);
+    glVertex2f(72, 32);
     glEnd();
 
-    glBegin(GL_POLYGON);   // main road
-	glColor3ub(r, g, b);
-        glVertex2f(-97, 44);
-        glVertex2f(-91, 44);
-        glVertex2f(-93, 53);
-        glVertex2f(-96, 53);
+    // Left Road
+    glBegin(GL_POLYGON);
+    glColor3ub(180, 180, 180);
+    glVertex2f(18, 36);
+    glVertex2f(18.013168, 0.10939);
+    glVertex2f(21.87264, 0.1971);
+    glVertex2f(22, 32);
     glEnd();
-
-    glBegin(GL_POLYGON);   // main road
-	glColor3ub(r, g, b);
-        glVertex2f(-97, 44);
-        glVertex2f(-96, 53);
-        glVertex2f(-99, 64);
-        glVertex2f(-101, 64);
-    glEnd();
-
-
-    glBegin(GL_POLYGON);   // main road
-	glColor3ub(r, g, b);
-        glVertex2f(-91, 44);
-        glVertex2f(-87, 64);
-        glVertex2f(-89, 64);
-        glVertex2f(-93, 53);
-    glEnd();
-
-    circle( 6.77, -98, 68, 7, 151, 0);
-    circle( 6.77, -106, 72, 7, 151, 0);
-    circle( 6.77, -106, 64, 7, 151, 0);
-    circle( 6.77, -96, 76, 7, 151, 0);
-
-    circle( 6.77, -72, 60, 7, 151, 0);
-    circle( 6.77, -80, 60, 7, 151, 0);
-    circle( 6.77, -76, 68, 7, 151, 0);
-
-    circle( 6.77, -88, 68, 7, 151, 0);
-    circle( 6.77, -85, 76, 7, 151, 0);
-
-    circle( 6.77, -88, 80, 7, 151, 0);
-
-
-
 }
 
 
-void house_back_side(int r, int g, int b){
-
-    int x = 110;
-
-    for(int i=0; i<21; i++){
-        x -= 4;
-        glBegin(GL_POLYGON);   // main road
-        glColor3ub(r, g, b);
-            glVertex2f(-x, 33.5);
-            glVertex2f(-(x+1),33.5);
-            glVertex2f(-(x+1), 45);
-            glVertex2f(-x, 45);
-        glEnd();
-
-    }
-
-        glBegin(GL_POLYGON);   // main road
-        glColor3ub(182, 140, 0);
-            glVertex2f(-109, 35);
-            glVertex2f(-25,35);
-            glVertex2f(-25, 36);
-            glVertex2f(-109, 36);
-        glEnd();
-
-
-        glBegin(GL_POLYGON);   // main road
-        glColor3ub(182, 140, 0);
-            glVertex2f(-109, 39);
-            glVertex2f(-25,39);
-            glVertex2f(-25, 40);
-            glVertex2f(-109, 40);
-        glEnd();
-
-
-        glBegin(GL_POLYGON);   // main road
-        glColor3ub(182, 140, 0);
-            glVertex2f(-109, 43);
-            glVertex2f(-25,43);
-            glVertex2f(-25, 44);
-            glVertex2f(-109, 44);
-        glEnd();
-
-
-
-
-
+// School Field Box Function ----- Avizit Roy
+void schoolFieldBox(float a, float b, float c, float d, float e, float f, float g, float h) {
+    glColor3ub(255,255,255);
+    glBegin(GL_LINES);
+    glVertex2f(a, b);
+    glVertex2f(c, d);
+    glVertex2f(c, d);
+    glVertex2f(e, f);
+    glVertex2f(e, f);
+    glVertex2f(g, h);
+    glVertex2f(g, h);
+    glVertex2f(a, b);
+    glEnd();
 }
+
+// School Field ----- Avizit Roy
+void schoolField() {
+
+    // Main Outline
+    glColor3ub(134, 255, 51);
+    glBegin(GL_QUADS);
+    glVertex2f(24.0, 30.0);
+    glVertex2f(70.0, 30.0);
+    glVertex2f(70.0, 10.0);
+    glVertex2f(24.0, 10.0);
+    glEnd();
+
+    // Field Outside White Outline
+    glColor3ub(255, 255, 255);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(24.0, 30.0);
+    glVertex2f(70.0, 30.0);
+    glVertex2f(70.0, 30.0);
+    glVertex2f(70.0, 10.0);
+    glVertex2f(70.0, 10.0);
+    glVertex2f(24.0, 10.0);
+    glVertex2f(24.0, 10.0);
+    glVertex2f(24.0, 30.0);
+    glEnd();
+
+    // Left First Box
+    schoolFieldBox(24, 22, 26, 22, 26, 18, 24, 18);
+
+    // Left Second Box
+    schoolFieldBox(24, 24, 28, 24, 28, 16, 24, 16);
+
+    // Left Second Box Half Moon
+    drawTransparentCircle(28.5, 20, 1.5, 0.0);
+
+    // Left Second Box Half Moon Cover
+    glBegin(GL_QUADS);
+    glColor3ub(134, 255, 51);
+    glVertex2f(26.5, 21.5);
+    glVertex2f(28, 21.5);
+    glVertex2f(28, 18.5);
+    glVertex2f(26.5, 18.5);
+    glEnd();
+
+    // Mid Line
+    glColor3ub(255, 255, 255);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(47, 30);
+    glVertex2f(47, 10);
+    glEnd();
+
+    // Mid Line Circle
+    drawTransparentCircle(47, 20, 1, 0);
+
+    // Right Second Box Half Moon
+    drawTransparentCircle(66.6, 20, 1.5, 0);
+
+    // Right Second Box
+    schoolFieldBox(66.6, 24, 70, 24, 70, 16, 66.6, 16);
+
+    // Right Second Box Half Moon Cover
+    glBegin(GL_QUADS);
+    glColor3ub(134, 255, 51);
+    glVertex2f(66.6, 21.5);
+    glVertex2f(68.2, 21.4);
+    glVertex2f(68.2, 18.4);
+    glVertex2f(66.6, 18.5);
+    glEnd();
+
+    // Right First Box
+    schoolFieldBox(68.6, 22, 70, 22, 70, 18, 68.6, 18);
+}
+
+
+// Draw Window for School Building ----- Avizit Roy
+void drawWindow(float a, float b, float c, float d, float e, float f, float g, float h) {
+    // Window
+    glColor3ub(56,100,127);
+    glBegin(GL_QUADS);
+    glVertex2f(a, b);
+    glVertex2f(c, d);
+    glVertex2f(e, f);
+    glVertex2f(g, h);
+    glEnd();
+
+    // Window Outline
+    glColor3ub(255, 255, 255);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2f(a, b);
+    glVertex2f(c, d);
+    glVertex2f(c, d);
+    glVertex2f(e, f);
+    glVertex2f(e, f);
+    glVertex2f(g, h);
+    glVertex2f(g, h);
+    glVertex2f(a, b);
+    glEnd();
+}
+
+// School Building ----- Avizit Roy
+void schoolBuilding() {
+
+    // Main Frame
+    glBegin(GL_QUADS);
+    glColor3ub(255,192,73);
+    glVertex2f(25, 62);
+    glVertex2f(70, 62);
+    glVertex2f(70, 40);
+    glVertex2f(25, 40);
+    glEnd();
+
+    // Main Frame Top 1
+    glBegin(GL_QUADS);
+    glColor3ub(193,61,33);
+    glVertex2f(24.2, 62.5);
+    glVertex2f(24.2, 62);
+    glVertex2f(71, 62);
+    glVertex2f(71, 62.5);
+    glEnd();
+
+    // Main Frame Top 2
+    glBegin(GL_QUADS);
+    glColor3ub(252,94,58);
+    glVertex2f(71, 64);
+    glVertex2f(71, 62.5);
+    glVertex2f(24.2, 62.5);
+    glVertex2f(24.2, 64);
+    glEnd();
+
+    // Center Frame
+    glBegin(GL_QUADS);
+    glColor3ub(254,226,166);
+    glVertex2f(40, 65);
+    glVertex2f(56, 65);
+    glVertex2f(56, 40);
+    glVertex2f(40, 40);
+    glEnd();
+
+    // Center Frame Top 1
+    glBegin(GL_QUADS);
+    glColor3ub(193,61,33);
+    glVertex2f(39, 65.5);
+    glVertex2f(39, 65);
+    glVertex2f(57, 65);
+    glVertex2f(57, 65.5);
+    glEnd();
+
+    // Center Frame Top 2
+    glBegin(GL_QUADS);
+    glColor3ub(252,94,58);
+    glVertex2f(57, 67);
+    glVertex2f(57, 65.5);
+    glVertex2f(39, 65.5);
+    glVertex2f(39, 67);
+    glEnd();
+
+    // Entrace
+
+    // Entrance Left Pillar
+    glBegin(GL_QUADS);
+    glColor3ub(255,255,255);
+    glVertex2f(42, 46);
+    glVertex2f(42.5, 46);
+    glVertex2f(42.5, 40);
+    glVertex2f(42, 40);
+    glEnd();
+
+    // Entrance Right Pillar
+    glBegin(GL_QUADS);
+    glColor3ub(255,255,255);
+    glVertex2f(53.5, 46);
+    glVertex2f(54, 46);
+    glVertex2f(54, 40);
+    glVertex2f(53.5, 40);
+    glEnd();
+
+    // Entrance Top
+    glBegin(GL_QUADS);
+    glColor3ub(252,94,58);
+    glVertex2f(41.5, 47);
+    glVertex2f(54.5, 47);
+    glVertex2f(54.5, 46);
+    glVertex2f(41.5, 46);
+    glEnd();
+
+    // Left Door Frame
+    glBegin(GL_QUADS);
+    glColor3ub(109,53,59);
+    glVertex2f(43, 45);
+    glVertex2f(47, 45);
+    glVertex2f(47, 40);
+    glVertex2f(43, 40);
+    glEnd();
+
+    // Left Door 1
+    glBegin(GL_QUADS);
+    glColor3ub(56,100,127);
+    glVertex2f(43.2, 44.8);
+    glVertex2f(44.7, 44.8);
+    glVertex2f(44.7, 40);
+    glVertex2f(43.2, 40);
+    glEnd();
+
+    // Left Door 2
+    glBegin(GL_QUADS);
+    glColor3ub(56,100,127);
+    glVertex2f(45.3, 44.8);
+    glVertex2f(46.7, 44.8);
+    glVertex2f(46.7, 40);
+    glVertex2f(45.3, 40);
+    glEnd();
+
+    // Right Door Frame
+    glBegin(GL_QUADS);
+    glColor3ub(109,53,59);
+    glVertex2f(49, 45);
+    glVertex2f(53, 45);
+    glVertex2f(53, 40);
+    glVertex2f(49, 40);
+    glEnd();
+
+    // Right Door 1
+    glBegin(GL_QUADS);
+    glColor3ub(56,100,127);
+    glVertex2f(49.2, 44.8);
+    glVertex2f(50.8, 44.8);
+    glVertex2f(50.8, 40);
+    glVertex2f(49.2, 40);
+    glEnd();
+
+    // Right Door 2
+    glBegin(GL_QUADS);
+    glColor3ub(56,100,127);
+    glVertex2f(51.2, 44.8);
+    glVertex2f(52.8, 44.8);
+    glVertex2f(52.8, 40);
+    glVertex2f(51.2, 40);
+    glEnd();
+
+    // Left Side Windows
+    drawWindow(26, 61, 29, 61, 29, 57, 26, 57);
+    drawWindow(31, 61, 34, 61, 34,57,31,57);
+    drawWindow(36,61,39,61,39,57,36,57);
+    drawWindow(26,53,29,53,29,49,26,49);
+    drawWindow(31,53,34,53,34,49,31,49);
+    drawWindow(36,53,39,53,39,49,36,49);
+    drawWindow(26,45,29,45,29,41,26,41);
+    drawWindow(31,45,34,45,34,41,31,41);
+    drawWindow(36,45,39,45,39,41,36,41);
+
+    // Center Windows
+    drawWindow(41,64,44,64,44,60,41,60);
+    drawWindow(46.5,64,49.5,64,49.5,60,46.5,60);
+    drawWindow(52,64,55,64,55,60,52,60);
+    drawWindow(41,58,44,58,44,54,41,54);
+    drawWindow(46.5,58,49.5,58,49.5,54,46.5,54);
+    drawWindow(52,58,55,58,55,54,52,54);
+    drawWindow(41,52,44,52,44,48,41,48);
+    drawWindow(46.5,52,49.5,52,49.5,48,46.5,48);
+    drawWindow(52,52,55,52,55,48,52,48);
+
+    // Right Side Windows
+    drawWindow(57,61,60,61,60,57,57,57);
+    drawWindow(61.5,61,64.5,61,64.5,57,61.5,57);
+    drawWindow(66,61,69,61,69,57,66,57);
+    drawWindow(57,53,60,53,60,49,57,49);
+    drawWindow(61.5,53,64.5,53,64.5,49,61.5,49);
+    drawWindow(66,53,69,53,69,49,66,49);
+    drawWindow(57,45,60,45,60,41,57,41);
+    drawWindow(61.5,45,64.5,45,64.5,41,61.5,41);
+    drawWindow(66,45,69,45,69,41,66,41);
+
+    // Base
+    glBegin(GL_QUADS);
+    glColor3ub(174,84,55);
+    glVertex2f(24, 40);
+    glVertex2f(24, 39);
+    glVertex2f(71, 39);
+    glVertex2f(71, 40);
+    glEnd();
+}
+
+
+// Flag Pole ----- Avizit Roy
+void flagPole() {
+    // Base
+    glBegin(GL_POLYGON);
+    glColor3ub(174,84,55);
+    glVertex2f(34.6, 37);
+    glVertex2f(35.7, 37);
+    glVertex2f(35.7, 36.6);
+    glVertex2f(36.2, 36.6);
+    glVertex2f(36.2, 36.2);
+    glVertex2f(34.1, 36.2);
+    glVertex2f(34.1, 36.6);
+    glVertex2f(34.6, 36.6);
+    glVertex2f(34.6, 37);
+    glEnd();
+
+    // Pole
+    glBegin(GL_QUADS);
+    glColor3ub(0,0,0);
+    glVertex2f(35, 37);
+    glVertex2f(35.3, 37);
+    glVertex2f(35.3, 47.2);
+    glVertex2f(35, 47.2);
+    glEnd();
+
+    // Flag
+    glBegin(GL_QUADS);
+    glColor3ub(0,255,0);
+    glVertex2f(35.4, 47);
+    glVertex2f(38.5, 47);
+    glVertex2f(38.5, 45);
+    glVertex2f(35.4, 45);
+    glEnd();
+
+    circle(0.5, 37, 46, 255, 0, 0);
+}
+
+
+
+
+// Windmill
+
+
+
+
 
 void display() {
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
@@ -1352,12 +1547,12 @@ void display() {
     boat1();
 
     boat2();
-
-    house_back_side(212, 164, 0);
     house1(0, 179, 200);
-    house2(99, 0, 91);
-    tree1(121, 105, 0);
 
+    schoolRoad();
+    schoolField();
+    schoolBuilding();
+    flagPole();
 
 
 
@@ -1371,6 +1566,9 @@ int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitWindowSize(1920, 1080);// Set the window's initial width & height         // Initialize GLUT
     glutCreateWindow("OpenGL Setup Test");
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable( GL_BLEND );
 
     glutDisplayFunc(display);// Register display callback handler for window re-paint
     glutTimerFunc(100, boat_animation_1, 0);

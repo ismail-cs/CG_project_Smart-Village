@@ -2153,13 +2153,13 @@ void display_night() {
     car1(188, 0, 0);
     lamp_post_night();
 
-    grass_night(-106, -66);
-    grass_night(-95, -66);
-    grass_night(-100, -64);
-    grass_night(-111, -70);
-    grass_night(-104, -71);
+    grass(-106, -66);
+    grass(-95, -66);
+    grass(-100, -64);
+    grass(-111, -70);
+    grass(-104, -71);
 
-    grass_night(-91, -68);
+    grass(-91, -68);
     sun(223, 234, 0);
     cloud1(231, 231, 231);
     cloud2(231, 231, 231);

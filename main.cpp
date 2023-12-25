@@ -1,3 +1,4 @@
+
 //#include <windows.h>  // for MS Windows
 
 
@@ -1129,14 +1130,7 @@ void house1(int r, int g, int b){
 }
 
 
-
-
-
 void house2(int r, int g, int b){
-
-
-
-
 
     glBegin(GL_POLYGON);   // main road
 	glColor3ub(0, 14, 190);
@@ -1217,8 +1211,6 @@ void house2(int r, int g, int b){
 }
 
 
-
-
 void tree1(int r, int g, int b){
 
     glBegin(GL_POLYGON);   // main road
@@ -1280,6 +1272,55 @@ void tree1(int r, int g, int b){
 
 }
 
+
+void house_back_side(int r, int g, int b){
+
+    int x = 110;
+
+    for(int i=0; i<25; i++){
+        x -= 4;
+        glBegin(GL_POLYGON);   // main road
+        glColor3ub(r, g, b);
+            glVertex2f(-x, 33.5);
+            glVertex2f(-(x+1),33.5);
+            glVertex2f(-(x+1), 45);
+            glVertex2f(-x, 45);
+        glEnd();
+
+    }
+
+        glBegin(GL_POLYGON);   // main road
+        glColor3ub(182, 140, 0);
+            glVertex2f(-109, 35);
+            glVertex2f(-8,35);
+            glVertex2f(-8, 36);
+            glVertex2f(-109, 36);
+        glEnd();
+
+
+        glBegin(GL_POLYGON);   // main road
+        glColor3ub(182, 140, 0);
+            glVertex2f(-109, 39);
+            glVertex2f(-8,39);
+            glVertex2f(-8, 40);
+            glVertex2f(-109, 40);
+        glEnd();
+
+
+        glBegin(GL_POLYGON);   // main road
+        glColor3ub(182, 140, 0);
+            glVertex2f(-109, 43);
+            glVertex2f(-8,43);
+            glVertex2f(-8, 44);
+            glVertex2f(-109, 44);
+        glEnd();
+
+
+
+
+
+}
+
 void display() {
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
     glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
@@ -1310,9 +1351,13 @@ void display() {
     boat1();
 
     boat2();
+
+    house_back_side(212, 164, 0);
     house1(0, 179, 200);
     house2(99, 0, 91);
     tree1(121, 105, 0);
+
+
 
 
     glFlush();  // Render now

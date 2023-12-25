@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1703514356 source:/home/ismail/study/cg_all/hello1/main.cpp
+1703515865 source:/home/ismail/study/cg_all/hello1/main.cpp
 	<GL/glut.h>
 	<math.h>
 	<cstdio>

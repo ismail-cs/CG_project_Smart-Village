@@ -1689,9 +1689,9 @@ void schoolField() {
 
 
 // Draw Window for School Building ----- Avizit Roy
-void drawWindow(float a, float b, float c, float d, float e, float f, float g, float h) {
+void drawWindow(float a, float b, float c, float d, float e, float f, float g, float h, int i, int j, int k) {
     // Window
-    glColor3ub(56,100,127);
+    glColor3ub(i, j, k);
     glBegin(GL_QUADS);
     glVertex2f(a, b);
     glVertex2f(c, d);
@@ -1715,7 +1715,7 @@ void drawWindow(float a, float b, float c, float d, float e, float f, float g, f
 }
 
 // School Building ----- Avizit Roy
-void schoolBuilding() {
+void schoolBuilding(int r, int g, int b) {
 
     // Main Frame
     glBegin(GL_QUADS);
@@ -1811,7 +1811,7 @@ void schoolBuilding() {
 
     // Left Door 1
     glBegin(GL_QUADS);
-    glColor3ub(56,100,127);
+    glColor3ub(r,g,b);
     glVertex2f(43.2, 44.8);
     glVertex2f(44.7, 44.8);
     glVertex2f(44.7, 40);
@@ -1820,7 +1820,7 @@ void schoolBuilding() {
 
     // Left Door 2
     glBegin(GL_QUADS);
-    glColor3ub(56,100,127);
+    glColor3ub(r,g,b);
     glVertex2f(45.3, 44.8);
     glVertex2f(46.7, 44.8);
     glVertex2f(46.7, 40);
@@ -1838,7 +1838,7 @@ void schoolBuilding() {
 
     // Right Door 1
     glBegin(GL_QUADS);
-    glColor3ub(56,100,127);
+    glColor3ub(r,g,b);
     glVertex2f(49.2, 44.8);
     glVertex2f(50.8, 44.8);
     glVertex2f(50.8, 40);
@@ -1847,7 +1847,7 @@ void schoolBuilding() {
 
     // Right Door 2
     glBegin(GL_QUADS);
-    glColor3ub(56,100,127);
+    glColor3ub(r,g,b);
     glVertex2f(51.2, 44.8);
     glVertex2f(52.8, 44.8);
     glVertex2f(52.8, 40);
@@ -1855,37 +1855,37 @@ void schoolBuilding() {
     glEnd();
 
     // Left Side Windows
-    drawWindow(26, 61, 29, 61, 29, 57, 26, 57);
-    drawWindow(31, 61, 34, 61, 34,57,31,57);
-    drawWindow(36,61,39,61,39,57,36,57);
-    drawWindow(26,53,29,53,29,49,26,49);
-    drawWindow(31,53,34,53,34,49,31,49);
-    drawWindow(36,53,39,53,39,49,36,49);
-    drawWindow(26,45,29,45,29,41,26,41);
-    drawWindow(31,45,34,45,34,41,31,41);
-    drawWindow(36,45,39,45,39,41,36,41);
+    drawWindow(26, 61, 29, 61, 29, 57, 26, 57, r, g, b);
+    drawWindow(31, 61, 34, 61, 34,57,31,57, r, g, b);
+    drawWindow(36,61,39,61,39,57,36,57, r, g, b);
+    drawWindow(26,53,29,53,29,49,26,49, r, g, b);
+    drawWindow(31,53,34,53,34,49,31,49, r, g, b);
+    drawWindow(36,53,39,53,39,49,36,49, r, g, b);
+    drawWindow(26,45,29,45,29,41,26,41, r, g, b);
+    drawWindow(31,45,34,45,34,41,31,41, r, g, b);
+    drawWindow(36,45,39,45,39,41,36,41, r, g, b);
 
     // Center Windows
-    drawWindow(41,64,44,64,44,60,41,60);
-    drawWindow(46.5,64,49.5,64,49.5,60,46.5,60);
-    drawWindow(52,64,55,64,55,60,52,60);
-    drawWindow(41,58,44,58,44,54,41,54);
-    drawWindow(46.5,58,49.5,58,49.5,54,46.5,54);
-    drawWindow(52,58,55,58,55,54,52,54);
-    drawWindow(41,52,44,52,44,48,41,48);
-    drawWindow(46.5,52,49.5,52,49.5,48,46.5,48);
-    drawWindow(52,52,55,52,55,48,52,48);
+    drawWindow(41,64,44,64,44,60,41,60, r, g, b);
+    drawWindow(46.5,64,49.5,64,49.5,60,46.5,60, r, g, b);
+    drawWindow(52,64,55,64,55,60,52,60, r, g, b);
+    drawWindow(41,58,44,58,44,54,41,54, r, g, b);
+    drawWindow(46.5,58,49.5,58,49.5,54,46.5,54, r, g, b);
+    drawWindow(52,58,55,58,55,54,52,54, r, g, b);
+    drawWindow(41,52,44,52,44,48,41,48, r, g, b);
+    drawWindow(46.5,52,49.5,52,49.5,48,46.5,48, r, g, b);
+    drawWindow(52,52,55,52,55,48,52,48, r, g, b);
 
     // Right Side Windows
-    drawWindow(57,61,60,61,60,57,57,57);
-    drawWindow(61.5,61,64.5,61,64.5,57,61.5,57);
-    drawWindow(66,61,69,61,69,57,66,57);
-    drawWindow(57,53,60,53,60,49,57,49);
-    drawWindow(61.5,53,64.5,53,64.5,49,61.5,49);
-    drawWindow(66,53,69,53,69,49,66,49);
-    drawWindow(57,45,60,45,60,41,57,41);
-    drawWindow(61.5,45,64.5,45,64.5,41,61.5,41);
-    drawWindow(66,45,69,45,69,41,66,41);
+    drawWindow(57,61,60,61,60,57,57,57, r, g, b);
+    drawWindow(61.5,61,64.5,61,64.5,57,61.5,57, r, g, b);
+    drawWindow(66,61,69,61,69,57,66,57, r, g, b);
+    drawWindow(57,53,60,53,60,49,57,49, r, g, b);
+    drawWindow(61.5,53,64.5,53,64.5,49,61.5,49, r, g, b);
+    drawWindow(66,53,69,53,69,49,66,49, r, g, b);
+    drawWindow(57,45,60,45,60,41,57,41, r, g, b);
+    drawWindow(61.5,45,64.5,45,64.5,41,61.5,41, r, g, b);
+    drawWindow(66,45,69,45,69,41,66,41, r, g, b);
 
     // Base
     glBegin(GL_QUADS);
@@ -1999,7 +1999,7 @@ void factoryRoof(float a, float b, float c, float d, float e, float f, float g, 
 }
 
 // Factory Main Code ----- Avizit Roy
-void factory() {
+void factory(int r, int g, int b) {
     // Ground Floor
     glBegin(GL_QUADS);
     glColor3ub(216,125,82);
@@ -2080,10 +2080,10 @@ void factory() {
     factoryRoof(103,27,103,25,108,23,108,25);
 
     // Ground Floor Windows
-    drawWindow(82,20,86,20,86,14,82,14);
-    drawWindow(88,20,92,20,92,14,88,14);
-    drawWindow(94,20,98,20,98,14,94,14);
-    drawWindow(100,20,104,20,104,14,100,14);
+    drawWindow(82,20,86,20,86,14,82,14, r, g, b);
+    drawWindow(88,20,92,20,92,14,88,14, r, g, b);
+    drawWindow(94,20,98,20,98,14,94,14, r, g, b);
+    drawWindow(100,20,104,20,104,14,100,14, r, g, b);
 
     // Second Floor Roof
     glBegin(GL_POLYGON);
@@ -2098,14 +2098,14 @@ void factory() {
 
     // Second Floor Window
     glBegin(GL_QUADS);
-    glColor3ub(93,73,83);
+    glColor3ub(r, g, b);
     glVertex2f(97, 37);
     glVertex2f(97, 30);
     glVertex2f(103, 30);
     glVertex2f(103, 37);
     glEnd();
 
-    circle(3, 100, 37, 93, 73, 83);
+    circle(3, 100, 37, r, g, b);
 
     glColor3ub(255, 255, 255);
     glLineWidth(2.0);
@@ -2187,9 +2187,9 @@ void display_rain() {
 
     schoolRoad();
     schoolField();
-    schoolBuilding();
+    schoolBuilding(233, 226, 16);
     flagPole();
-    factory();
+    factory(233, 226, 16);
     drawWindmill();
 
     lamp_post_2_night();
@@ -2203,9 +2203,15 @@ void display_rain() {
     glPointSize(2.0);
 
     glBegin(GL_POINTS);
-    for (const auto& raindrop : raindrops) {
+//    for (const auto& raindrop : raindrops) {
+//        glVertex2f(raindrop.x, raindrop.y);
+//    }
+
+    for (vector<Raindrop>::const_iterator it = raindrops.begin(); it != raindrops.end(); ++it) {
+        const Raindrop& raindrop = *it;
         glVertex2f(raindrop.x, raindrop.y);
     }
+
     glEnd();
 
     // Initialize a few raindrops
@@ -2223,13 +2229,22 @@ void display_rain() {
 
 // Function to update the position of raindrops
 void rain_animation(int value) {
-    for (auto& raindrop : raindrops) {
+//    for (auto& raindrop : raindrops) {
+//        // Update y-coordinate of raindrop
+//        raindrop.y -= raindrop.speed;
+//
+//        // Reset raindrop position if it goes out of the screen
+//        if (raindrop.y < 0) {
+//            raindrop.y = 600.0; // Reset to the top of the screen
+//        }
+//    }
+    for (vector<Raindrop>::iterator it = raindrops.begin(); it != raindrops.end(); ++it) {
         // Update y-coordinate of raindrop
-        raindrop.y -= raindrop.speed;
+        it->y -= it->speed;
 
         // Reset raindrop position if it goes out of the screen
-        if (raindrop.y < 0) {
-            raindrop.y = 600.0; // Reset to the top of the screen
+        if (it->y < 0) {
+            it->y = 600.0; // Reset to the top of the screen
         }
     }
 
@@ -2282,9 +2297,9 @@ void display_night() {
 
     schoolRoad();
     schoolField();
-    schoolBuilding();
+    schoolBuilding(233, 226, 16);
     flagPole();
-    factory();
+    factory(233, 226, 16);
     drawWindmill();
 
     lamp_post_2_night();
@@ -2338,9 +2353,9 @@ void display() {
     // Avizit Roy
     schoolRoad();
     schoolField();
-    schoolBuilding();
+    schoolBuilding(56,100,127);
     flagPole();
-    factory();
+    factory(56,100,127);
     drawWindmill();
 
 
@@ -2399,7 +2414,7 @@ void handleMouse(int button, int state, int x, int y) {
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitWindowSize(1920, 1080);// Set the window's initial width & height         // Initialize GLUT
-    glutCreateWindow("OpenGL Setup Test");
+    glutCreateWindow("Smart Village");
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable( GL_BLEND );

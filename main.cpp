@@ -2,10 +2,11 @@
 
 //#include <windows.h>  // for MS Windows
 
-
+#include <iostream>
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include <math.h>
 #include<cstdio>
+#include <ctime>
 #include <vector>
 using namespace std;
 
@@ -2139,15 +2140,64 @@ void factory(int r, int g, int b) {
 
 
 // Rain Simulation ----- Avizit Roy
-struct Raindrop {
-    float x, y, speed;
+const int NUM_RAINDROPS = 100;
 
-    Raindrop(float x, float y, float speed) : x(x), y(y), speed(speed) {}
+struct Raindrop {
+    float x, y;
+    float speed, length;
+
+    Raindrop() {
+        reset();
+    }
+
+    void reset() {
+        x = rand() % 220 - 110;
+        y = rand() % 230 - 70;
+        speed = static_cast<float>(rand() % 5 + 10);
+        length = static_cast<float>(rand() % 10 + 1); // Adjust the length as needed
+    }
+
+    void update() {
+        y -= speed;
+        if (y < 0) {
+            reset();
+        }
+    }
 };
 
-vector<Raindrop> raindrops; // Vector to store raindrops
+std::vector<Raindrop> raindrops;
+
+void update(int value) {
+    for (auto& drop : raindrops) {
+        drop.update();
+    }
+
+    glutPostRedisplay();
+    glutTimerFunc(16, update, 0); // 16 milliseconds (about 60 FPS)
+}
+
+void render() {
+
+    glBegin(GL_LINES);
+    glColor3f(1.0f, 1.0f, 1.0f); // White color for raindrops
+
+    for (const auto& drop : raindrops) {
+        glVertex2f(drop.x, drop.y);
+        glVertex2f(drop.x, drop.y - drop.length);
+    }
+
+    glEnd();
+}
 
 
+
+void reshape(int width, int height) {
+    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-110.0, 110.0, -70.0, 90.0);
+    glMatrixMode(GL_MODELVIEW);
+}
 
 void display_rain() {
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
@@ -2196,63 +2246,10 @@ void display_rain() {
     car2(255, 216, 0);
 
 
+    render();
+    glutSwapBuffers();
 
 
-    // Draw raindrops
-    glColor3f(1.0, 1.0, 1.0); // White color for raindrops
-    glPointSize(2.0);
-
-    glBegin(GL_POINTS);
-//    for (const auto& raindrop : raindrops) {
-//        glVertex2f(raindrop.x, raindrop.y);
-//    }
-
-    for (vector<Raindrop>::const_iterator it = raindrops.begin(); it != raindrops.end(); ++it) {
-        const Raindrop& raindrop = *it;
-        glVertex2f(raindrop.x, raindrop.y);
-    }
-
-    glEnd();
-
-    // Initialize a few raindrops
-    for (int i = 0; i < 10; ++i) {
-        float speed = static_cast<float>(rand() % 2 + 1);
-        raindrops.push_back(Raindrop(rand() % 220 - 110, rand() % 230 - 70, speed));
-    }
-
-
-
-
-
-    glFlush();  // Render now
-}
-
-// Function to update the position of raindrops
-void rain_animation(int value) {
-//    for (auto& raindrop : raindrops) {
-//        // Update y-coordinate of raindrop
-//        raindrop.y -= raindrop.speed;
-//
-//        // Reset raindrop position if it goes out of the screen
-//        if (raindrop.y < 0) {
-//            raindrop.y = 600.0; // Reset to the top of the screen
-//        }
-//    }
-    for (vector<Raindrop>::iterator it = raindrops.begin(); it != raindrops.end(); ++it) {
-        // Update y-coordinate of raindrop
-        it->y -= it->speed;
-
-        // Reset raindrop position if it goes out of the screen
-        if (it->y < 0) {
-            it->y = 600.0; // Reset to the top of the screen
-        }
-    }
-
-    // Redraw the scene
-    glutPostRedisplay();
-
-    // Call update function again after 16 milliseconds (60 FPS)
-    glutTimerFunc(30, rain_animation, 0);
 }
 
 
@@ -2387,6 +2384,7 @@ void handleKeypress(unsigned char key, int x, int y) {
             glutDisplayFunc(display);
             break;
         case 'r':
+
             glutDisplayFunc(display_rain);
             break;
         case 'R':
@@ -2436,7 +2434,14 @@ int main(int argc, char** argv) {
     glutTimerFunc(0, windmill_animation, 0);
 
     // Rain ----- Avizit Roy
-    glutTimerFunc(25, rain_animation, 0); // Call update function after 25 milliseconds
+    srand(static_cast<unsigned>(time(nullptr)));
+
+    for (int i = 0; i < NUM_RAINDROPS; ++i) {
+        raindrops.emplace_back();
+    }
+
+    glutTimerFunc(0, update, 0);
+
 
     glutKeyboardFunc(handleKeypress);
     glutMouseFunc(handleMouse);

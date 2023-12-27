@@ -14,7 +14,9 @@ using namespace std;
 
 
 
-
+GLfloat school_bus_position_x = -70.0f;
+GLfloat school_bus_position_y = 1.0f;
+GLfloat school_bus_speed = 1.7;
 GLfloat position = 65.0f;
 GLfloat position1 = -40.0f;
 
@@ -1559,6 +1561,151 @@ void sun (int r, int g, int b){
 }
 
 
+void school_bus(int r, int g, int b){
+
+
+glPushMatrix();
+glTranslatef(school_bus_position_x,school_bus_position_y, 0.0f);
+
+    glBegin(GL_POLYGON);   // main bus
+	glColor3ub(r, g, b);
+        glVertex2f(-57.3, -8.3);
+        glVertex2f(-33, -7.5);
+        glVertex2f(-32.8, -5);
+        glVertex2f(-32.8, -3);
+
+        glVertex2f(-33.5, -1);
+        glVertex2f(-56, -1.4);
+        glVertex2f(-57.5, -2);
+        glVertex2f(-57.5, -6);
+        glVertex2f(-57.3, -8.3);
+
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // bus door
+	glColor3ub(175, 117, 0);
+        glVertex2f(-57, -7.8);
+        glVertex2f(-55, -7.8);
+        glVertex2f(-55, -3.4);
+        glVertex2f(-56, -3.4);
+
+        glVertex2f(-57.2, -4.2);
+        glVertex2f(-57.2, -5.6);
+        glVertex2f(-57, -7.8);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // first glass
+	glColor3ub(71, 71, 71);
+
+        glVertex2f(-57.2, -3.2);
+        glVertex2f(-54.4, -3.2);
+        glVertex2f(-54.4, -1.8);
+        glVertex2f(-56, -1.8);
+
+        glVertex2f(-57.2, -2.2);
+        glVertex2f(-57.2, -3.2);
+
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // red line
+	glColor3ub(255, 0, 0);
+        glVertex2f(-54, -5.5);
+        glVertex2f(-33.4, -5.2);
+        glVertex2f(-33.4, -4.7);
+        glVertex2f(-54, -5);
+    glEnd();
+
+
+
+
+    glBegin(GL_POLYGON);   // bus glass
+	glColor3ub(71, 71, 71);
+        glVertex2f(-54, -4.5);
+        glVertex2f(-52, -4.5);
+        glVertex2f(-52, -2);
+        glVertex2f(-54, -2);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // bus glass
+	glColor3ub(71, 71, 71);
+        glVertex2f(-51, -4.5);
+        glVertex2f(-49, -4.5);
+        glVertex2f(-49, -2);
+        glVertex2f(-51, -2);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // bus glass
+	glColor3ub(71, 71, 71);
+        glVertex2f(-48, -4.5);
+        glVertex2f(-46, -4.5);
+        glVertex2f(-46, -2);
+        glVertex2f(-48, -2);
+    glEnd();
+
+
+    glBegin(GL_POLYGON);   // bus glass
+	glColor3ub(71, 71, 71);
+        glVertex2f(-45, -4.3);
+        glVertex2f(-43, -4.3);
+        glVertex2f(-43, -1.8);
+        glVertex2f(-45, -1.8);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // bus glass
+	glColor3ub(71, 71, 71);
+        glVertex2f(-42, -4.3);
+        glVertex2f(-40, -4.3);
+        glVertex2f(-40, -1.8);
+        glVertex2f(-42, -1.8);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // bus glass
+	glColor3ub(71, 71, 71);
+        glVertex2f(-39, -4.3);
+        glVertex2f(-37, -4.3);
+        glVertex2f(-37, -1.8);
+        glVertex2f(-39, -1.8);
+    glEnd();
+
+    glBegin(GL_POLYGON);   // bus glass
+	glColor3ub(71, 71, 71);
+        glVertex2f(-36, -4.3);
+        glVertex2f(-34, -4.3);
+        glVertex2f(-34, -1.8);
+        glVertex2f(-36, -1.8);
+    glEnd();
+
+
+
+    circle(1.5, -51.5, -8, 70, 62, 56 );
+    circle(1.5, -38, -7.5, 70, 62, 56);
+
+
+glPopMatrix();
+
+}
+
+
+void school_bus_animation(int value) {
+
+    if(school_bus_position_x < -90.0){
+        school_bus_position_x = 160.0f;
+        school_bus_position_y = 6.0f;
+    }
+
+    school_bus_position_x -= school_bus_speed;
+    school_bus_position_y -= 0.08;
+
+	glutPostRedisplay();
+
+
+	glutTimerFunc(100,school_bus_animation,0);
+}
+
+
 
 //==============================================================================================================================================
 
@@ -1983,7 +2130,7 @@ void drawWindmill() {
 
 // Timer function to animate the windmill ----- Avizit Roy
 void windmill_animation(int value) {
-    angle += 2.0f;  // Increment the rotation angle
+    angle += 20.0f;  // Increment the rotation angle
     glutPostRedisplay();
     glutTimerFunc(16, windmill_animation, 0);  // Set the next timer
 }
@@ -2199,8 +2346,9 @@ void display_snow() {
 
 
 
+
     // Draw snowdrops
-    glColor3f(1.0, 1.0, 1.0); // White color for snowdrops
+    glColor3f(1.0, 0.0, 0.0); // White color for snowdrops
     glPointSize(2.0);
 
     glBegin(GL_POINTS);
@@ -2473,7 +2621,7 @@ void display() {
 
     lamp_post_2();
     car2(255, 216, 0);
-
+    school_bus(255, 216, 0);
 
 
 
@@ -2563,6 +2711,7 @@ int main(int argc, char** argv) {
     glutTimerFunc(100, cloud_animation_1, 0);
     glutTimerFunc(100, cloud_animation_2, 0);
     glutTimerFunc(100, sun_animation, 0);
+    glutTimerFunc(100, school_bus_animation, 0);
 
     // Windmill ----- Avizit Roy
     glutTimerFunc(0, windmill_animation, 0);
@@ -2570,7 +2719,7 @@ int main(int argc, char** argv) {
     // Snow ----- Avizit Roy
     glutTimerFunc(25, snow_animation, 0); // Call update function after 25 milliseconds
 
-    // Rain ----- Avizit Roy
+    // Rain
     glutTimerFunc(0, update, 0);
 
     glutKeyboardFunc(handleKeypress);

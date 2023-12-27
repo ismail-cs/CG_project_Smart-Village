@@ -2,7 +2,7 @@
 
 //#include <windows.h>  // for MS Windows
 
-#include <iostream>
+
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include <math.h>
 #include<cstdio>
@@ -2139,6 +2139,120 @@ void factory(int r, int g, int b) {
 
 
 
+// Snow Simulation ----- Avizit Roy
+struct Snowdrop {
+    float x, y, speed;
+
+    Snowdrop(float x, float y, float speed) : x(x), y(y), speed(speed) {}
+};
+
+vector<Snowdrop> snowdrops; // Vector to store raindrops
+
+
+
+void display_snow() {
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
+    glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
+    glLineWidth(7.5);
+
+    fild(64, 200, 0);
+    river(168, 241, 255);
+    river_wave(147, 224, 240);
+    sky(61, 96, 112);
+    up_fild(94, 250, 89);
+
+    road();
+    road_mid_line(180,180,180);
+    car1(188, 0, 0);
+    lamp_post_night();
+
+    grass(-106, -66);
+    grass(-95, -66);
+    grass(-100, -64);
+    grass(-111, -70);
+    grass(-104, -71);
+
+    grass(-91, -68);
+    sun(223, 234, 0);
+    cloud1(231, 231, 231);
+    cloud2(231, 231, 231);
+
+    boat1();
+
+    boat2();
+
+    house_back_side(212, 164, 0);
+    house1(0, 179, 200);
+    house2(99, 0, 91);
+    tree1(121, 105, 0);
+
+    schoolRoad();
+    schoolField();
+    schoolBuilding(233, 226, 16);
+    flagPole();
+    factory(233, 226, 16);
+    drawWindmill();
+
+    lamp_post_2_night();
+    car2(255, 216, 0);
+
+
+
+
+    // Draw snowdrops
+    glColor3f(1.0, 1.0, 1.0); // White color for snowdrops
+    glPointSize(2.0);
+
+    glBegin(GL_POINTS);
+//    for (const auto& raindrop : raindrops) {
+//        glVertex2f(raindrop.x, raindrop.y);
+//    }
+
+    for (vector<Snowdrop>::const_iterator it = snowdrops.begin(); it != snowdrops.end(); ++it) {
+        const Snowdrop& snowdrop = *it;
+        glVertex2f(snowdrop.x, snowdrop.y);
+    }
+
+    glEnd();
+
+    // Initialize a few snowdrops
+    for (int i = 0; i < 10; ++i) {
+        float speed = static_cast<float>(rand() % 2 + 1);
+        snowdrops.push_back(Snowdrop(rand() % 220 - 110, rand() % 230 - 70, speed));
+    }
+
+
+
+
+
+    glFlush();  // Render now
+}
+
+// Function to update the position of raindrops
+void snow_animation(int value) {
+//    for (auto& raindrop : raindrops) {
+//        // Update y-coordinate of raindrop
+//        raindrop.y -= raindrop.speed;
+//
+//        // Reset raindrop position if it goes out of the screen
+//        if (raindrop.y < 0) {
+//            raindrop.y = 600.0; // Reset to the top of the screen
+//        }
+//    }
+    for (vector<Snowdrop>::iterator it = snowdrops.begin(); it != snowdrops.end(); ++it) {
+        // Update y-coordinate of raindrop
+        it->y -= it->speed;
+    }
+
+    // Redraw the scene
+    glutPostRedisplay();
+
+    // Call update function again after 16 milliseconds (60 FPS)
+    glutTimerFunc(30, snow_animation, 0);
+}
+
+
+
 // Rain Simulation ----- Avizit Roy
 const int NUM_RAINDROPS = 100;
 
@@ -2251,7 +2365,6 @@ void display_rain() {
 
 
 }
-
 
 
 
@@ -2383,11 +2496,26 @@ void handleKeypress(unsigned char key, int x, int y) {
         case 'D':
             glutDisplayFunc(display);
             break;
+        case 's':
+            glutDisplayFunc(display_snow);
+            break;
+        case 'S':
+            glutDisplayFunc(display_snow);
+            break;
         case 'r':
+            srand(static_cast<unsigned>(time(nullptr)));
 
+            for (int i = 0; i < NUM_RAINDROPS; ++i) {
+                raindrops.emplace_back();
+            }
             glutDisplayFunc(display_rain);
             break;
         case 'R':
+            srand(static_cast<unsigned>(time(nullptr)));
+
+            for (int i = 0; i < NUM_RAINDROPS; ++i) {
+                raindrops.emplace_back();
+            }
             glutDisplayFunc(display_rain);
             break;
         glutPostRedisplay();
@@ -2399,10 +2527,16 @@ void handleKeypress(unsigned char key, int x, int y) {
 // Mouse Event ----- Avizit Roy
 void handleMouse(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON) {
-        glutDisplayFunc(display_night);
+        srand(static_cast<unsigned>(time(nullptr)));
+
+        for (int i = 0; i < NUM_RAINDROPS; ++i) {
+            raindrops.emplace_back();
+        }
+
+        glutDisplayFunc(display_rain);
 	}
     if (button == GLUT_RIGHT_BUTTON) {
-        glutDisplayFunc(display_rain);
+        glutDisplayFunc(display_snow);
     }
     glutPostRedisplay();
 }
@@ -2433,15 +2567,11 @@ int main(int argc, char** argv) {
     // Windmill ----- Avizit Roy
     glutTimerFunc(0, windmill_animation, 0);
 
+    // Snow ----- Avizit Roy
+    glutTimerFunc(25, snow_animation, 0); // Call update function after 25 milliseconds
+
     // Rain ----- Avizit Roy
-    srand(static_cast<unsigned>(time(nullptr)));
-
-    for (int i = 0; i < NUM_RAINDROPS; ++i) {
-        raindrops.emplace_back();
-    }
-
     glutTimerFunc(0, update, 0);
-
 
     glutKeyboardFunc(handleKeypress);
     glutMouseFunc(handleMouse);
